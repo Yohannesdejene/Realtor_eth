@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
-import { Box, CardMedia, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  CardMedia,
+  useMediaQuery,
+  useTheme,
+  Grid,
+  Modal,
+  Backdrop,
+  Fade,
+  Button,
+} from "@mui/material";
 ///icons
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -72,12 +82,12 @@ const ImageCard = ({ house, houseImages }) => {
               key={index}
               onClick={handleDialogeChange}
               style={{
-                width: {
-                  lg: "100px",
-                  md: "80px",
-                  sm: "60px",
-                  xs: "50px",
-                },
+                // width: {
+                //   lg: "100px",
+                //   md: "80px",
+                //   sm: "60px",
+                //   xs: "50px",
+                // },
                 cursor: "pointer",
               }}
             >
@@ -95,9 +105,15 @@ const ImageCard = ({ house, houseImages }) => {
                     md: "450px",
                     xs: "300px",
                   },
+                  // height: "100vh",
+                  width: "100vw",
                   cursor: "pointer",
                   objectFit: "cover",
                   borderRadius: "5px",
+                  // maxWidth: "100%",
+                  // maxHeight: "70vh",
+                  // margin: "auto",
+                  // display: "block",
                 }}
               />
             </div>
@@ -169,6 +185,7 @@ const ImageCard = ({ house, houseImages }) => {
       </Box>
     );
   };
+
   return (
     <>
       <Box
