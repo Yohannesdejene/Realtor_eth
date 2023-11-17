@@ -183,7 +183,7 @@ const Home = () => {
           }}
           onClick={handleGotoLogin}
         >
-          Login To View More Images
+          Login To View More Homes
         </Button>
       )}
       <Typography

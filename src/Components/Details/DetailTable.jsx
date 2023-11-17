@@ -44,10 +44,7 @@ const DetailTable = ({ house }) => {
       label: "Area Size",
       value: house.areaSize,
     },
-    {
-      label: "Area Size",
-      value: house.areaSize,
-    },
+
     {
       label: "City",
       value: house.city,

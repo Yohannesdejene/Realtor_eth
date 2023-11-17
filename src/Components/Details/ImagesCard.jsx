@@ -204,6 +204,7 @@ const ImageCard = ({ house, houseImages }) => {
           }}
         >
           <Carousel
+            style={{ color: "red" }}
             showArrows={true}
             showThumbs={false}
             dynamicHeight={false}
@@ -214,7 +215,7 @@ const ImageCard = ({ house, houseImages }) => {
                 key={index}
                 aria-label={`${label} ${index + 1}`}
                 className={isSelected ? "selected" : ""}
-                style={{ background: isSelected ? "blue" : "whitegrey" }}
+                style={{ background: isSelected ? "blue" : themes.black.main }}
               />
             )}
           >
@@ -232,6 +233,7 @@ const ImageCard = ({ house, houseImages }) => {
                       xs: "50px",
                     },
                     cursor: "pointer",
+                    color: "red",
                   }}
                 >
                   <CardMedia

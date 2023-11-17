@@ -202,11 +202,12 @@ const SlideHomes = () => {
             key={card.id}
             component={Button}
             onClick={(event) => {
-              if (user.isLoggedIn) {
-                handleClickCard(card.route);
-              } else {
-                handleRedirectLogin(card.route);
-              }
+              handleClickCard(card.route);
+              // if (user.isLoggedIn) {
+              //   handleClickCard(card.route);
+              // } else {
+              //   handleRedirectLogin(card.route);
+              // }
             }}
             // href={card.route}
             style={{

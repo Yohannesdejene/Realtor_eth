@@ -58,18 +58,19 @@ const AdvertCard = () => {
               ms: "100%",
               xs: "100%",
             },
+            width: "100%",
+            justifyContent: "center",
+            padding: "10px",
+            textAlign: "center",
           }}
         >
           <Typography
             variant="h3"
-            sx={{ paddingTop: "10%", fontWeight: "bold", paddingLeft: "10%" }}
+            sx={{ paddingTop: "10%", fontWeight: "bold" }}
           >
             Get Your Dream Home{" "}
           </Typography>
-          <Typography
-            variant="h5"
-            sx={{ marginTop: "20px", paddingLeft: "10%" }}
-          >
+          <Typography variant="h5" sx={{ marginTop: "20px" }}>
             Finding your perfect home has never been easier. Our user-friendly
             website offers a streamlined search experience, allowing you to
             effortlessly navigate through a vast database of available

@@ -132,7 +132,7 @@ const DownloadCard = () => {
               alt="Phone"
               style={{
                 width: "100%",
-                height: "10%",
+                height: "100%",
                 objectFit: "cover",
               }}
             />

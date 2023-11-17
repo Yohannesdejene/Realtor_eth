@@ -8,6 +8,7 @@ import {
   DialogTitle,
   TextField,
   Box,
+  Typography,
 } from "@mui/material";
 
 import { useTheme, styled } from "@mui/material/styles";
@@ -66,9 +67,13 @@ const Dialoge = () => {
             mb: "20px",
             backgroundColor: "#EFEFEF",
             color: themes.black.main,
+            display: "flex",
+            justifyContent: "space-between",
           }}
         >
-          Login to get Personalised Properties
+          <Typography variant="h5">
+            Login to get Personalised Properties
+          </Typography>
           <CloseIcon onClick={onClose} sx={{ ml: "10%", cursor: "pointer" }} />
         </DialogTitle>
         <Box
