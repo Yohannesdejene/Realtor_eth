@@ -194,7 +194,7 @@ const Home = () => {
           fontWeight: 700,
         }}
       >
-        Download Our App
+        Realtor Agent
       </Typography>
       <DownloadCard />
       <AdvertCard />

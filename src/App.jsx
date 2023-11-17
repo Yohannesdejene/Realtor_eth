@@ -188,12 +188,12 @@ function decryptData(ciphertext, passphrase) {
   const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   return decryptedData;
 }
+
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state);
   const darkMode = useSelector((user) => user.tooglesReducer.darkMode);
   const login = useSelector((user) => user.tooglesReducer.login);
-  const theme = darkMode ? ThemeDark : ThemeLight;
 
   // useEffect(() => {
   //   const hideTimer = setTimeout(() => {
@@ -213,6 +213,22 @@ function App() {
   const handleButtonClick = () => {
     toast.error("Success message");
   };
+
+  useEffect(() => {
+    console.log("darkMode1", darkMode);
+    const darkModeTest = localStorage.getItem("darkMode");
+    console.log("darkmode testing", darkModeTest);
+
+    if (darkModeTest !== null) {
+      console.log("dispatching");
+      const bool = Boolean(darkModeTest);
+      dispatch(updateDarkMode(bool));
+    }
+
+    console.log("darkMode2", darkMode);
+  }, [dispatch]);
+
+  const theme = darkMode ? ThemeDark : ThemeLight;
 
   useEffect(() => {
     const passphrase = "johnabi";

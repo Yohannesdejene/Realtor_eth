@@ -18,7 +18,6 @@ import TuneIcon from "@mui/icons-material/Tune";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../../store/actions/HomesAction";
 import { setBuyrent } from "../../store/actions/ToogleAction";
-import Typist from "react-typist";
 const images = ["home3.jpg", "home4.jpg", "home5.jpg", "newHome.png"];
 
 const HomeCover = () => {
@@ -282,15 +281,30 @@ const HomeCover = () => {
             }}
             label={
               isLabelVisible && (
-                <Typist
-                  style={{ color: theme.palette.black.main }}
-                  avgTypingDelay={50}
-                  startDelay={500}
-                  cursor={{ show: false }}
-                  stop={isTypingStopped}
+                <Typography
+                  variant="h6"
+                  // sx={{
+                  //   fontSize: "4vw",
+                  //   "@media (min-width: 768px)": {
+                  //     fontSize: "2vw",
+                  //   },
+                  //   "@media (min-width: 1024px)": {
+                  //     fontSize: "1.5vw",
+                  //   },
+                  // }}
+                  sx={{
+                    display: "flex",
+                    textAlign: "left",
+                    fontSize: {
+                      lg: "100%",
+                      md: "80%",
+                      sm: "80%",
+                      xs: "60%",
+                    },
+                  }}
                 >
                   Search by sub city, Address name, property Type
-                </Typist>
+                </Typography>
               )
             }
           />

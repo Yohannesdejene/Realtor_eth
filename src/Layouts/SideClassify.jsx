@@ -21,6 +21,7 @@ import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { updateSideMenu } from "../store/actions/ToogleAction";
@@ -203,7 +204,7 @@ const SideClassify = () => {
             </Typography>
           </Box>
 
-          <div style={{ marginTop: "30px" }}>
+          <div style={{ marginTop: "30px", marginTop: "20px" }}>
             <button
               name="buy"
               onClick={handleButtonClick}
@@ -219,9 +220,14 @@ const SideClassify = () => {
                 fontSize: "15px",
                 cursor: "pointer",
                 marginBottom: "10px",
+                justifyContent: "space-between",
               }}
             >
               Buy
+              <ExpandMoreIcon
+                onClick={handleButtonClick}
+                style={{ pointerEvents: "none" }}
+              />
             </button>
 
             {open.buy && (
@@ -269,10 +275,15 @@ const SideClassify = () => {
                 fontWeight: "bold",
                 fontSize: "15px",
                 cursor: "pointer",
-                marginBottom:"10px"
+                marginBottom: "10px",
+                justifyContent: "space-between",
               }}
             >
               Rent
+              <ExpandMoreIcon
+                onClick={handleButtonClick}
+                style={{ pointerEvents: "none" }}
+              />
             </button>
 
             {open.rent && (

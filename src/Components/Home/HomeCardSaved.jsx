@@ -33,6 +33,19 @@ const HomeCardSaved = ({ cards }) => {
 
   ///remove the saved homes
   const handleRemoveSavedHome = (homeId) => {
+    dispatch(removeSavedHome(homeId));
+    toast.success(
+      "House removed from saved list!",
+      {
+        autoClose: 2000,
+      },
+      {
+        // Set the background color
+        backgroundColor: themes.green.main,
+        // Set the text color
+        color: themes.white.main,
+      }
+    );
     console.log("handle saved message", homeId);
     // event.stopPropagation();
     setLoading(true);
@@ -44,34 +57,23 @@ const HomeCardSaved = ({ cards }) => {
         .then((res) => {
           console.log("response", res);
           dispatch(removeSavedHome(homeId));
-          toast.success(
-            "House removed from saved list!",
-            {
-              autoClose: 2000,
-            },
-            {
-              // Set the background color
-              backgroundColor: themes.green.main,
-              // Set the text color
-              color: themes.white.main,
-            }
-          );
+
           setLoading(false);
         })
         .catch((err) => {
           console.log(err);
-          toast.error(
-            "Can't remove home .check your internet connection",
-            {
-              autoClose: 2000,
-            },
-            {
-              // Set the background color
-              backgroundColor: themes.green.main,
-              // Set the text color
-              color: themes.white.main,
-            }
-          );
+          // toast.error(
+          //   "Can't remove home .check your internet connection",
+          //   {
+          //     autoClose: 2000,
+          //   },
+          //   {
+          //     // Set the background color
+          //     backgroundColor: themes.green.main,
+          //     // Set the text color
+          //     color: themes.white.main,
+          //   }
+          // );
           setLoading(false);
         });
     } catch (err) {

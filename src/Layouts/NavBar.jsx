@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { alpha } from "@mui/system";
 import {
   MenuItem,
@@ -127,7 +127,11 @@ function NavBar() {
   };
   const handleToggleDarkMode = (event) => {
     // const selectedValue = event.target.value;
-    dispatch(updateDarkMode(!toogle.darkMode));
+    // const selectedValue = event.target.value;
+    console.log("hhehehheehehehh");
+    const newDarkMode = !toogle.darkMode;
+    localStorage.setItem("darkMode", newDarkMode);
+    dispatch(updateDarkMode(newDarkMode));
   };
 
   const StyledButton = styled(Button)(({ theme }) => ({
@@ -202,6 +206,12 @@ function NavBar() {
   const handleGotoLogin = () => {
     dispatch(updateLogin(true));
   };
+  useEffect(() => {
+    const darkMode = localStorage.getItem("darkMode");
+    if (darkMode) {
+      dispatch(updateDarkMode(darkMode));
+    }
+  }, []);
   return (
     <AppBar
       elevation={1}
@@ -722,12 +732,12 @@ function NavBar() {
             )}
           </Box>
 
-          <Box sx={{ mr: "10px" }}>
+          {/* <Box sx={{ mr: "10px" }}>
             <select value={toogle.language} onChange={handleLanguageChange}>
               <option value="en">English</option>
               <option value="am">አማርኛ</option>
             </select>
-          </Box>
+          </Box> */}
 
           <Box className="mode">
             {toogle.darkMode && (

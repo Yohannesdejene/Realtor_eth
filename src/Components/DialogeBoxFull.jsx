@@ -13,7 +13,7 @@ const DialogBoxFull = ({
     <Dialog
       open={dialogeValue}
       onClose={handleDialogeChange}
-      // sx={{ mt: "10px" }}
+      sx={{ padding: "0px" }}
       maxWidth={true}
       fullwidth
       // sx={{ width: "100vw" }}
@@ -37,7 +37,14 @@ const DialogBoxFull = ({
         />
       </DialogTitle>
 
-      <DialogContent sx={{ width: "80vw" }}>
+      <DialogContent
+        sx={{
+          padding: "0px",
+          width: {
+            md: "90vw",
+          },
+        }}
+      >
         {" "}
         <Content />
       </DialogContent>

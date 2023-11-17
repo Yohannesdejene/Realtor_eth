@@ -23,7 +23,7 @@ const DownloadCard = () => {
       <Box
         sx={{
           display: "flex",
-          m: "5%",
+          // m: "5%",
           flexDirection: {
             xs: "column",
             sm: "column",
@@ -100,17 +100,17 @@ const DownloadCard = () => {
           className="get out app"
           sx={{
             display: "flex",
+            flexDirection: {
+              lg: "row",
+              md: "row",
+              sm: "column",
+              xs: "column",
+            },
             width: {
               lg: "50%",
               md: "50%",
               sm: "80%",
               xs: "100%",
-            },
-            height: {
-              lg: "400px",
-              md: "300px",
-              sm: "350px",
-              xs: "270px",
             },
             gap: {
               lg: "10px",
@@ -123,7 +123,6 @@ const DownloadCard = () => {
             sx={{
               textAlign: "center",
               position: "relative",
-
               borderRadius: "20px",
               overflow: "hidden",
             }}
@@ -138,6 +137,7 @@ const DownloadCard = () => {
               }}
             />
           </Box>
+
           <Box
             className="Download Text"
             sx={{
@@ -146,15 +146,14 @@ const DownloadCard = () => {
               fontWeight: "bold",
               fontSize: "18px",
               borderRadius: "5px",
-
-              width: "50%",
+              width: "100%",
+              justifyContent: "center",
             }}
           >
             <Typography
-              variant={sm ? "h5" : "h4"}
+              variant="h3"
               sx={{
                 fontWeight: 700,
-                textAlign: "left",
                 mt: {
                   sm: "20px",
                   md: "20px",
@@ -174,7 +173,6 @@ const DownloadCard = () => {
             <Typography
               variant={sm ? "h6" : "h5"}
               sx={{
-                textAlign: "left",
                 mb: {
                   lg: "30px",
                   md: "30px",
@@ -186,61 +184,44 @@ const DownloadCard = () => {
               Experience the best your neighborhood has to offer, all in one
               app.
             </Typography>
+
             <Box
               sx={{
+                width: "100%",
+                maxWidth: 170,
+                margin: "0 auto",
                 display: "flex",
-                flexDirection: "column",
-                alignItem: "center",
-
-                gap: { lg: "10px", md: "15px", sm: "10px", xs: "1px" },
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
               }}
             >
-              <Box
-                sx={{
-                  width: "70%",
-                }}
-                component={Link}
-                href={
-                  "https://play.google.com/store/apps/details?id=com.maz.realtor"
-                }
-              >
+              <Link href="https://play.google.com/store/apps/details?id=com.maz.realtor">
                 <CardMedia
                   component="img"
                   image="/Images/android.png"
+                  alt="Android"
                   sx={{
                     width: "100%",
-
-                    objectFit: "cover",
-                    borderRadius: "50px",
-                    objectFit: "cover",
+                    height: "auto",
+                    borderRadius: "10px",
+                    marginBottom: "10px",
                   }}
                 />
-              </Box>
-              <Box
-                sx={{
-                  width: "70%",
-                  mt: {
-                    sm: "5px",
-                    xs: "10px",
-                  },
-                }}
-                component={Link}
-                href={
-                  "https://play.google.com/store/apps/details?id=com.maz.realtor"
-                }
-              >
+              </Link>
+
+              <Link href="https://play.google.com/store/apps/details?id=com.maz.realtor">
                 <CardMedia
                   component="img"
                   image="/Images/ios.png"
+                  alt="iOS"
                   sx={{
                     width: "100%",
-
-                    objectFit: "cover",
-                    borderRadius: "50px",
-                    objectFit: "cover",
+                    height: "auto",
+                    borderRadius: "10px",
                   }}
                 />
-              </Box>
+              </Link>
             </Box>
           </Box>
         </Box>

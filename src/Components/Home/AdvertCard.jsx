@@ -58,12 +58,6 @@ const AdvertCard = () => {
               ms: "100%",
               xs: "100%",
             },
-            height: {
-              lg: "400px",
-              md: "400px",
-              sm: "300px",
-              xs: "300px",
-            },
           }}
         >
           <Typography

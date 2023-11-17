@@ -1,11 +1,12 @@
 import { ActionTypes } from "../constants/actionTypes";
-const getDarkMode = localStorage.getItem("darkMode");
-
+const storedDarkMode = localStorage.getItem("darkMode");
+const initialDarkMode =
+  storedDarkMode !== null ? Boolean(storedDarkMode) : false;
 const intialState = {
   request: false,
   login: false,
   signup: false,
-  darkMode: getDarkMode ? getDarkMode : false,
+  darkMode: initialDarkMode,
   sideMenu: false,
   language: "en",
   buyRent: "buy",

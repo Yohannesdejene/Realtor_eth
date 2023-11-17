@@ -48,7 +48,63 @@ const ImageCard = ({ house, houseImages }) => {
     setDialogeValue(!dialogeValue);
     console.log("helo, value", dialogeValue);
   };
-
+  const content2 = () => {
+    return (
+      <Carousel
+        showArrows={true}
+        showThumbs={false}
+        dynamicHeight={false}
+        renderIndicator={(onClickHandler, isSelected, index, label) => (
+          <button
+            type="button"
+            onClick={onClickHandler}
+            key={index}
+            aria-label={`${label} ${index + 1}`}
+            className={isSelected ? "selected" : ""}
+            style={{ background: isSelected ? "blue" : "whitegrey" }}
+          />
+        )}
+      >
+        {houseImages &&
+          // houseImages.length >  &&
+          houseImages.map((image, index) => (
+            <div
+              key={index}
+              onClick={handleDialogeChange}
+              style={{
+                width: {
+                  lg: "100px",
+                  md: "80px",
+                  sm: "60px",
+                  xs: "50px",
+                },
+                cursor: "pointer",
+              }}
+            >
+              <CardMedia
+                onClick={handleDialogeChange}
+                component="img"
+                image={
+                  image && image.imageUrl
+                    ? baseUrl + image.imageUrl
+                    : "/imgejdjd"
+                }
+                alt="Image loading..."
+                sx={{
+                  height: {
+                    md: "450px",
+                    xs: "300px",
+                  },
+                  cursor: "pointer",
+                  objectFit: "cover",
+                  borderRadius: "5px",
+                }}
+              />
+            </div>
+          ))}
+      </Carousel>
+    );
+  };
   const Content = () => {
     return (
       <Box
@@ -65,12 +121,13 @@ const ImageCard = ({ house, houseImages }) => {
           image={
             house && house.coverImage ? baseUrl + house.coverImage : "/jdhdhdh"
           }
-          alt="alt"
+          alt="Image loading...."
           sx={{
             height: {
               md: "520px",
               xs: "300px",
             },
+            width: "100%",
             cursor: "pointer",
             objectFit: "cover",
             borderRadius: "5px",
@@ -168,7 +225,7 @@ const ImageCard = ({ house, houseImages }) => {
                         ? baseUrl + image.imageUrl
                         : "/imgejdjd"
                     }
-                    alt="alt"
+                    alt="Image loading..."
                     sx={{
                       height: {
                         md: "450px",
@@ -186,7 +243,7 @@ const ImageCard = ({ house, houseImages }) => {
           <DialogeBoxFull
             dialogeValue={dialogeValue}
             handleDialogeChange={handleDialogeChange}
-            Content={Content}
+            Content={content2}
           />
 
           <Discription house={house} />

@@ -32,6 +32,18 @@ const HomeCardSmall = ({ cards }) => {
 
   const handleSavedMessage = (homeId) => {
     console.log("handle saved message", homeId);
+    toast.success(
+      "Home saved",
+      {
+        autoClose: 2000,
+      },
+      {
+        // Set the background color
+        backgroundColor: themes.green.main,
+        // Set the text color
+        color: themes.white.main,
+      }
+    );
     // event.stopPropagation();
     setLoading(true);
     try {
@@ -41,18 +53,7 @@ const HomeCardSmall = ({ cards }) => {
         })
         .then((res) => {
           console.log("response", res);
-          toast.success(
-            "Home saved",
-            {
-              autoClose: 2000,
-            },
-            {
-              // Set the background color
-              backgroundColor: themes.green.main,
-              // Set the text color
-              color: themes.white.main,
-            }
-          );
+
           setLoading(false);
         })
         .catch((err) => {
