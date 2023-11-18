@@ -191,7 +191,7 @@ function decryptData(ciphertext, passphrase) {
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state);
+
   const darkMode = useSelector((user) => user.tooglesReducer.darkMode);
   const login = useSelector((user) => user.tooglesReducer.login);
 

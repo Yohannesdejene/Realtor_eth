@@ -64,37 +64,31 @@ const DownloadCard = () => {
               }}
             />
           </Box>
-          <Box sx={{ textAlign: "center" }}>
-            <Typography variant={sm ? "h5" : "h4"} sx={{ fontWeight: 700 }}>
-              Become Realtor agent
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                mt: "10px",
-                ml: "30%",
-              }}
-            >
-              <Typography
-                variant={sm ? "h6" : "h5"}
-                component={Link}
-                href="/becomeagent"
-                sx={{
-                  fontWeight: 700,
-                  textDecoration: "none",
-                  justifyContent: "center",
-                  ml: "10px",
-                  mr: "5px",
-                  color: themes.green.main,
-                  ":hover": {
-                    textDecoration: "underline",
-                  },
-                }}
-              >
-                Register here
-              </Typography>
-            </Box>
-          </Box>
+          <Typography variant={sm ? "h5" : "h4"} sx={{ fontWeight: 700 }}>
+            Become Realtor agent
+          </Typography>
+          <Typography
+            variant={sm ? "h6" : "h5"}
+            component={Link}
+            href="/becomeagent"
+            sx={{
+              fontSize: {
+                lg: "17px",
+                xs: "15px",
+              },
+              fontWeight: 700,
+              textDecoration: "none",
+              justifyContent: "center",
+              ml: "10px",
+              mr: "5px",
+              color: themes.green.main,
+              ":hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Register here
+          </Typography>
         </Box>
         <Box
           className="get out app"

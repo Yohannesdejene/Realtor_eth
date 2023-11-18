@@ -29,7 +29,6 @@ import ContactAgent from "../Components/Details/ContactAgent";
 import ImageCard from "../Components/Details/ImagesCard";
 import Description from "../Components/Details/Description";
 import DetailTable from "../Components/Details/DetailTable";
-import GoogleMapBox from "../Components/Details/GoogleMapBox";
 import HomeCardSmall from "../Components/Home/HomeCardSmall";
 import Footer from "../Layouts/Footer";
 import api from "../Services/index";

@@ -17,7 +17,6 @@ import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-import Typist from "react-typist";
 import { useDispatch, useSelector } from "react-redux";
 
 //icons

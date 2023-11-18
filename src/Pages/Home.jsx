@@ -119,7 +119,6 @@ const Home = () => {
           mt: "5px",
           textAlign: "center",
           fontWeight: 700,
-          mb: "30px",
         }}
       >
         Featured Homes
@@ -127,15 +126,16 @@ const Home = () => {
       <Box
         sx={{
           ml: {
-            lg: "3%",
+            lg: "5%",
             sm: "3%",
             xs: "0px",
+            md: "10%",
           },
-          mr: {
-            lg: "3%",
-            sm: "3%",
-            xs: "0px",
-          },
+          // mr: {
+          //   lg: "3%",
+          //   sm: "3%",
+          //   xs: "0px",
+          // },
         }}
       >
         {" "}

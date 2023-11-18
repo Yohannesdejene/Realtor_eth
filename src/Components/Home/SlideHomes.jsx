@@ -241,28 +241,6 @@ const SlideHomes = () => {
             >
               {card.text}
             </Typography>
-
-            {/* <CardContent>
-              <Typography variant="body1" sx={{ fontSize: "16px" }}>
-                {card.name}
-              </Typography>
-            </CardContent> */}
-
-            {/* <Typography
-              variant="caption"
-              sx={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                backgroundColor: "#ffffff",
-                color: "#000000",
-                borderRadius: "50%",
-                padding: "6px",
-                fontSize: "16px",
-              }}
-            >
-              108
-            </Typography> */}
           </Card>
         ))}
       </Box>

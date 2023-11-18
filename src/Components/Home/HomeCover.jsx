@@ -10,6 +10,7 @@ import {
   Box,
   Stack,
   Tooltip,
+  useMediaQuery,
 } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -279,34 +280,38 @@ const HomeCover = () => {
                 </InputAdornment>
               ),
             }}
-            label={
-              isLabelVisible && (
-                <Typography
-                  variant="h6"
-                  // sx={{
-                  //   fontSize: "4vw",
-                  //   "@media (min-width: 768px)": {
-                  //     fontSize: "2vw",
-                  //   },
-                  //   "@media (min-width: 1024px)": {
-                  //     fontSize: "1.5vw",
-                  //   },
-                  // }}
-                  sx={{
-                    display: "flex",
-                    textAlign: "left",
-                    fontSize: {
-                      lg: "100%",
-                      md: "80%",
-                      sm: "80%",
-                      xs: "85%",
-                    },
-                  }}
-                >
-                  Search by sub city, Address name, property Type
-                </Typography>
-              )
-            }
+            // label={
+            //   isLabelVisible && (
+            //     <Typography
+            //       // variant="h6"
+            //       // sx={{
+            //       //   fontSize: "4vw",
+            //       //   "@media (min-width: 768px)": {
+            //       //     fontSize: "2vw",
+            //       //   },
+            //       //   "@media (min-width: 1024px)": {
+            //       //     fontSize: "1.5vw",
+            //       //   },
+            //       // }}
+            //       sx={{
+            //         display: "flex",
+            //         textAlign: "left",
+            //         // fontSize: {
+            //         //   lg: "100%",
+            //         //   md: "80%",
+            //         //   sm: "80%",
+            //         //   // xs: "200%",
+            //         //   xxs: "60%",
+            //         //   xxxs: "50%",
+            //         // },
+            //         fontSize: xxxs ? "5px" : xxs ? "7px" : xs ? "10px" : "10px",
+            //       }}
+            //     >
+            //       Search by sub city, Address name, property Type
+            //     </Typography>
+            //   )
+            // }
+            placeholder=" Search by sub city, Address name, property Type"
           />
         </Box>
         {/* <div
