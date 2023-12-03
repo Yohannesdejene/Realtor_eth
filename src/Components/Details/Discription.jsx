@@ -1,27 +1,37 @@
 import { useState, useEffect } from "react";
-import { Typography, Box, CardMedia, useTheme } from "@mui/material";
+import {
+  Typography,
+  Box,
+  CardMedia,
+  useTheme,
+  useMediaQuery,
+  IconButton,
+  Grid,
+} from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import HotelIcon from "@mui/icons-material/Hotel";
 
 const Discription = ({ house }) => {
   const theme = useTheme();
+  const xs = useMediaQuery("(max-width:600px)");
+
   const themes = theme.palette;
   const formatter = new Intl.NumberFormat("en-US");
 
   return (
     <Box sx={{ mt: "15px" }}>
       <Typography
-        variant="h5"
+        variant={xs ? "h4" : "h3"}
         sx={{
           fontFamily: "Roboto",
-          // fontSize: `${fontSize.medium}`,
           fontWeight: "bold",
+          textTransform: "capitalize", // Add this line
         }}
       >
         {house.houseType}
       </Typography>
       <Typography
-        variant="h5"
+        variant={xs ? "h4" : "h3"}
         sx={{
           fontFamily: "Roboto",
           fontWeight: 800,
@@ -32,78 +42,86 @@ const Discription = ({ house }) => {
         {"rent" === "rent" && <>{formatter.format(house.price)} Birr /Month</>}
         {"selll" == "sale" && <>{formatter.format(house.price)} Birr </>}
       </Typography>
-      <Box
-        sx={{
-          fontSize: "16px",
-          display: "flex",
-
-          mt: "15px",
-        }}
-      >
-        <LocationOnIcon
+      <Box sx={{ display: "flex", fontSize: "15px", mt: "10px" }}>
+        <LocationOnIcon size="large" />{" "}
+        <Typography
+          variant={xs ? "h6" : "h4"}
           sx={{
-            fontSize: "20px",
-            mt: {
-              xs: "3px",
-              sm: "3px",
-              md: "-3px",
-              lg: "-3px",
-            },
-            color: themes.mygrey1.main,
+            fontFamily: "Roboto",
+            textTransform: "capitalize", // Add this line
           }}
-        />{" "}
-        <Typography variant="h6" sx={{}}>
-          {" "}
+        >
           {house.addressName}
         </Typography>
       </Box>
-      <Box
-        sx={{
-          fontSize: "15px",
-          display: "flex",
-          // alignItem: "center",
-          fontWeight: 0,
-          mt: "10px",
-          gap: "15px",
-        }}
+
+      <Grid
+        container
+        display="flex"
+        spacing={xs ? "10px" : 1}
+        sx={{ mt: "10px" }}
       >
-        <Box sx={{ fontWeight: 700, display: "flex", alignItem: "center" }}>
-          <HotelIcon sx={{ mr: "10px" }} />
+        <Grid
+          item
+          xs={6}
+          sm={4}
+          sx={{
+            display: "flex",
+            gap: {
+              xs: "2px",
+              md: "10px",
+            },
+          }}
+        >
+          <HotelIcon />
           <Typography
-            variant="h5"
+            variant={xs ? "h6" : "h4"}
             sx={{
-              fontWeight: 700,
               fontFamily: "Roboto",
+              textTransform: "capitalize", // Add this line
             }}
           >
             {house.bedrooms} beds
           </Typography>
-        </Box>
-        <Typography
-          variant="h5"
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={4}
           sx={{
-            fontWeight: 700,
-
-            fontFamily: "Roboto",
             display: "flex",
+            gap: {
+              xs: "2px",
+              md: "10px",
+            },
           }}
         >
           <img
             src="/Images/bathroom.jpg"
-            width="23px"
-            height="23px"
+            width="30px"
+            height="30px"
             alt="Small Image"
-            style={{ marginRight: "5px" }}
           />
-          {house.bathrooms} bathrooms
-        </Typography>
-        <Typography
-          variant="h5"
+          <Typography
+            variant={xs ? "h6" : "h4"}
+            sx={{
+              fontFamily: "Roboto",
+              textTransform: "capitalize", // Add this line
+            }}
+          >
+            {house.bathrooms} bathrooms
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={4}
           sx={{
-            fontWeight: 700,
-
-            fontFamily: "Roboto",
             display: "flex",
+            gap: {
+              xs: "2px",
+              md: "10px",
+            },
           }}
         >
           <CardMedia
@@ -111,20 +129,21 @@ const Discription = ({ house }) => {
             image="/Images/square.jpg"
             alt="alt"
             sx={{
-              width: {
-                xs: "23px",
-                md: "23px",
-              },
-              height: {
-                xs: "23px",
-                md: "23px",
-              },
-              marginRight: "5px",
+              width: "30px",
+              height: "30px",
             }}
           />
-          {house.areaSize} sqm
-        </Typography>
-      </Box>
+          <Typography
+            variant={xs ? "h6" : "h4"}
+            sx={{
+              fontFamily: "Roboto",
+              textTransform: "capitalize", // Add this line
+            }}
+          >
+            {house.areaSize} sqm
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

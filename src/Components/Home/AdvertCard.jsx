@@ -2,99 +2,78 @@ import { useState, useEffect, useRef } from "react";
 import {
   Button,
   Typography,
-  IconButton,
-  Link,
   Box,
-  Card,
   CardMedia,
-  CardContent,
-  useMediaQuery,
+  Grid,
+  Tooltip,
 } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
-import VideoPlayer from "../VideoPlayer";
+import {
+  CommonTypography,
+  DescWritter,
+  CommonButtonLink,
+} from "../CommonComponent/index";
 
 const AdvertCard = () => {
-  const sm = useMediaQuery("(max-width:600px)");
-  const md = useMediaQuery("(max-width:960px)");
-  const lg = useMediaQuery("(max-width:1280px)");
-
   const theme = useTheme();
   const themes = theme.palette;
   return (
-    <Box
-      sx={{
-        ml: "5%",
-        mr: "5%",
-        marginTop: "20px",
-      }}
+    <Grid
+      container
+      justifyContent="center"
+      spacing={5}
+      sx={{ alignItems: "center" }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          gap: "5px",
-
-          flexDirection: {
-            lg: "row",
-            md: "row",
-            sm: "column",
-            xs: "column",
-          },
-        }}
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={6}
+        lg={6}
+        justifyContent="center"
+        // sx={{ backgroundColor: "red" }}
       >
-        <Box
+        <CardMedia
+          component="img"
+          src="/Images/business.png"
+          alt="Business"
           sx={{
-            width: "100%",
+            maxWidth: "100%",
           }}
-        >
-          <VideoPlayer videoId="gxNl9TQ3fqc" />
-        </Box>
+        />
 
-        <Box
+        {/* <Box
           sx={{
-            // backgroundColor: "red",
-            width: {
-              lg: "100%",
-              md: "50%",
-              ms: "100%",
-              xs: "100%",
-            },
-            width: "100%",
+            maxWidth: "100%",
+            display: "flex",
             justifyContent: "center",
-            padding: "10px",
-            textAlign: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "10px",
           }}
         >
-          <Typography
-            variant="h3"
-            sx={{ paddingTop: "10%", fontWeight: "bold" }}
-          >
-            Get Your Dream Home{" "}
-          </Typography>
-          <Typography variant="h5" sx={{ marginTop: "20px" }}>
-            Finding your perfect home has never been easier. Our user-friendly
+          <CommonTypography label=" Become Realtor agent" />
+
+          <CommonButtonLink label="Register here" route="/becomeagent" />
+        </Box> */}
+      </Grid>
+
+      <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <CommonTypography label="Get Your Dream Home" />
+          <DescWritter
+            label=" Finding your perfect home has never been easier. Our user-friendly
             website offers a streamlined search experience, allowing you to
             effortlessly navigate through a vast database of available
-            properties.
-          </Typography>
-          <Button
-            component={Link}
-            href="/homes"
-            style={{
-              backgroundColor: themes.green.main,
-              color: themes.white.main,
-              textTransform: "none",
-              fontFamily: "Roboto",
-              fontWeight: "bold",
-              width: "50%",
-              marginLeft: "10%",
-              marginTop: "15px",
-            }}
-          >
-            Buy Now
-          </Button>
+            properties."
+          />
+
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <CommonButtonLink label="Buy Now" route="/homes" />
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 export default AdvertCard;

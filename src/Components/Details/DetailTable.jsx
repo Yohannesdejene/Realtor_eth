@@ -66,11 +66,12 @@ const DetailTable = ({ house }) => {
 
         display: "flex",
         flexDirection: "column",
+        // backgroundColor: "red",
       }}
     >
       {" "}
       <Typography
-        variant="h4"
+        variant="h2"
         sx={{
           fontSize: "21px",
           fontFamily: "Roboto",
@@ -84,10 +85,6 @@ const DetailTable = ({ house }) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
-          width: {
-            xs: "100%",
-            md: "60%",
-          },
         }}
       >
         {house &&
@@ -107,7 +104,7 @@ const DetailTable = ({ house }) => {
               }}
             >
               <Typography
-                variant="h6"
+                variant="h4"
                 sx={{
                   fontFamily: "Roboto",
                   // color: themes.black.main,
@@ -118,7 +115,7 @@ const DetailTable = ({ house }) => {
               </Typography>
 
               <Typography
-                variant="h6"
+                variant="h4"
                 sx={{
                   fontFamily: "Roboto",
 

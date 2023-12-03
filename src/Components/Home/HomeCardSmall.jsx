@@ -9,6 +9,8 @@ import {
   CardMedia,
   CardContent,
   useTheme,
+  Grid,
+  Paper,
 } from "@mui/material";
 import { toast } from "react-toastify";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
@@ -130,89 +132,96 @@ const HomeCardSmall = ({ cards }) => {
   const themes = theme.palette;
 
   return (
-    <Box
-      className="Homes"
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "16px",
-        // marginTop: "80px",
-        height: "auto",
-        padding: "0 16px",
-      }}
-    >
+    <Grid container sx={{ gap: "10px" }}>
       {cards &&
         cards.map((card, index) => (
-          <Card
+          <Grid
             component={Link}
             // href={"/detail/" + `${card.id}`}
             onClick={() => handleClickCard(card.id)}
-            // onClick={(event) => {
-            //   event.stopPropagation();
-            //   if (isLoggedIn) {
-            //     handleClickCard(card.id);
-            //   } else {
-            //     handleRedirectLoginHome(card.id);
-            //   }
-            // }}
-            key={index}
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            justifyContent="center"
             sx={{
-              flex: "1 0 370px",
               fontFamily: "Roboto",
-
-              maxWidth: {
-                lg: "280px",
-                md: "270px",
-                sm: "270px",
-                xs: "100%",
-              },
-
-              justifyContent: "center",
+              textTransform: "none",
+              // justifyContent: "center",
               position: "relative",
               borderRadius: "10px",
               cursor: "pointer",
               textDecoration: "none",
               ":hover": {
-                // border: "2px solid green",
-                // borderColor: themes.green.main,
+                transform: "translateZ(-2px)",
                 boxShadow: !darkMode
-                  ? " 0px 0px 10px 0px rgba(0, 0, 0, 0.3)"
+                  ? " 0px 0px 6px 0px rgba(0, 0, 0, 0.3)"
                   : "0px 0px 10px 0px rgba(255, 255, 255, 0.5)",
-
-                // maxWidth: "275px",
               },
             }}
           >
-            <Box sx={{ position: "relative" }}>
-              <CardMedia
-                component="img"
-                image={`https://circlefreelance.com/realtor/${card.coverImage}`}
-                alt={card.text}
-                sx={{ width: "100%", height: "180px", objectFit: "cover" }}
-              />
-              <IconButton
+            <Card key={index}>
+              <Box
                 sx={{
-                  position: "absolute",
-                  bottom: "8px",
-                  right: "8px",
-                  color: "#fff",
-                  zIndex: 1,
-                  // pointerEvents: "none",
-                  cursor: "pointer",
-                }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  if (isLoggedIn) {
-                    handleSavedMessage(card.id);
-                  } else {
-                    handleRedirectLogin(card.id);
-                  }
+                  position: "relative",
                 }}
               >
-                <TurnedInIcon sx={{ fontSize: "30px" }} />
-              </IconButton>
-            </Box>
-            {/* <Typography
+                <CardMedia
+                  component="img"
+                  image={`https://circlefreelance.com/realtor/${card.coverImage}`}
+                  alt={card.text}
+                  sx={{
+                    width: "100%",
+                    height: "180px",
+                    objectFit: "cover",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "translateZ(-10px)",
+                    },
+                  }}
+                />
+                <IconButton
+                  sx={{
+                    position: "absolute",
+                    bottom: "8px",
+                    right: "8px",
+                    color: "#fff",
+                    zIndex: 1,
+                    // pointerEvents: "none",
+                    cursor: "pointer",
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    if (isLoggedIn) {
+                      handleSavedMessage(card.id);
+                    } else {
+                      handleRedirectLogin(card.id);
+                    }
+                  }}
+                >
+                  <TurnedInIcon sx={{ fontSize: "30px" }} />
+                </IconButton>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    position: "absolute",
+                    backgroundColor: "#ffffff",
+                    borderRadius: "10px",
+                    top: "16px",
+                    right: "16px",
+                    color: "#000000",
+                    zIndex: 1,
+                    p: "5px",
+                    // fontSize: "11px",
+                    fontWeight: "bold",
+                    fontFamily: "Roboto",
+                  }}
+                >
+                  For {card.marketStatus}
+                </Typography>
+              </Box>
+              {/* <Typography
               variant="body1"
               sx={{
                 position: "absolute",
@@ -230,135 +239,126 @@ const HomeCardSmall = ({ cards }) => {
             >
               1.2km away
             </Typography> */}
-            <Typography
-              variant="body1"
-              sx={{
-                position: "absolute",
-                backgroundColor: "#ffffff",
-                borderRadius: "10px",
-                top: "16px",
-                right: "16px",
-                color: "#000000",
-                zIndex: 1,
-                p: "5px",
-                // fontSize: "11px",
-                fontWeight: "bold",
-                fontFamily: "Roboto",
-              }}
-            >
-              For {card.marketStatus}
-            </Typography>
-            <CardContent sx={{ height: "40%" }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontFamily: "Roboto",
-                  // fontSize: `${fontSize.medium}`,
-                  fontWeight: "bold",
-                }}
-              >
-                {card.houseType}
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontFamily: "Roboto",
-                  fontWeight: 800,
-                  color: themes.green.main,
-                  mt: "4px",
-                }}
-              >
-                {card.marketStatus == "rent" && (
-                  <>{formatter.format(card.price)} Birr /Month</>
-                )}
-                {card.marketStatus == "sale" && (
-                  <>{formatter.format(card.price)} Birr </>
-                )}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{
-                  //   fontSize: "15px",
-                  display: "flex",
-                  alignText: "center",
-                  fontWeight: 0,
-                  mt: "15px",
-                  fontFamily: "Roboto",
-                }}
-              >
-                <LocationOnIcon
-                  size="small"
-                  sx={{ fontSize: "20px", color: themes.mygrey1.main }}
-                />{" "}
-                {card.subcity}
-              </Typography>
-              <Box
-                variant="body2"
-                sx={{
-                  fontSize: "15px",
-                  display: "flex",
-                  // alignItem: "center",
-                  fontWeight: 0,
-                  mt: "15px",
-                  gap: "15px",
-                }}
-              >
+
+              <CardContent sx={{ height: "40%" }}>
                 <Typography
-                  variant="body2"
-                  sx={{ fontWeight: 700, display: "flex", alignItem: "center" }}
+                  variant="h6"
+                  sx={{
+                    fontFamily: "Roboto",
+                    // fontSize: `${fontSize.medium}`,
+                    textTrasform: "none",
+                    fontWeight: "bold",
+                  }}
                 >
-                  <HotelIcon sx={{ mr: "5px", mt: "-2px", fontSize: "25px" }} />
+                  {card.houseType}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: "Roboto",
+                    fontWeight: 800,
+                    color: themes.green.main,
+                    mt: "4px",
+                  }}
+                >
+                  {card.marketStatus == "rent" && (
+                    <>{formatter.format(card.price)} Birr /Month</>
+                  )}
+                  {card.marketStatus == "sale" && (
+                    <>{formatter.format(card.price)} Birr </>
+                  )}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    //   fontSize: "15px",
+                    display: "flex",
+                    alignText: "center",
+                    fontWeight: 0,
+                    mt: "15px",
+                    fontFamily: "Roboto",
+                  }}
+                >
+                  <LocationOnIcon
+                    size="small"
+                    sx={{ fontSize: "20px", color: themes.mygrey1.main }}
+                  />{" "}
+                  {card.subcity}
+                </Typography>
+                <Box
+                  variant="body2"
+                  sx={{
+                    fontSize: "15px",
+                    display: "flex",
+                    // alignItem: "center",
+                    fontWeight: 0,
+                    mt: "15px",
+                    gap: "15px",
+                  }}
+                >
                   <Typography
                     variant="body2"
                     sx={{
                       fontWeight: 700,
-                      fontFamily: "Roboto",
+                      display: "flex",
+                      alignItem: "center",
                     }}
                   >
-                    {card.bedrooms} beds
+                    <HotelIcon
+                      sx={{ mr: "5px", mt: "-2px", fontSize: "25px" }}
+                    />
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 700,
+                        fontFamily: "Roboto",
+                      }}
+                    >
+                      {card.bedrooms} beds
+                    </Typography>
                   </Typography>
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: "11px",
-                    fontFamily: "Roboto",
-                    display: "flex",
-                  }}
-                >
-                  <img
-                    src="/Images/bathroom.jpg"
-                    width="21px"
-                    height="21px"
-                    alt="Small Image"
-                    style={{ marginRight: "5px" }}
-                  />
-                  {card.bathrooms} bathrooms
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: "11px",
-                    fontFamily: "Roboto",
-                    display: "flex",
-                  }}
-                >
-                  <img
-                    src="/Images/square.jpg"
-                    width="21px"
-                    height="21px"
-                    alt="Small Image"
-                    style={{ marginRight: "5px" }}
-                  />
-                  {card.areaSize} sqm
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: "11px",
+                      fontFamily: "Roboto",
+                      display: "flex",
+                    }}
+                  >
+                    <img
+                      src="/Images/bathroom.jpg"
+                      width="21px"
+                      height="21px"
+                      alt="Small Image"
+                      style={{ marginRight: "5px" }}
+                    />
+                    {card.bathrooms} bathrooms
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: "11px",
+                      fontFamily: "Roboto",
+                      display: "flex",
+                    }}
+                  >
+                    <img
+                      src="/Images/square.jpg"
+                      width="21px"
+                      height="21px"
+                      alt="Small Image"
+                      style={{ marginRight: "5px" }}
+                    />
+                    {card.areaSize} sqm
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-    </Box>
+    </Grid>
   );
 };
 

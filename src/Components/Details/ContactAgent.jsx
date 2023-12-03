@@ -7,6 +7,7 @@ import {
   useTheme,
   Paper,
   Button,
+  Grid,
 } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
@@ -19,16 +20,14 @@ const ContactAgent = () => {
   const theme = useTheme();
   const themes = theme.palette;
   return (
-    <>
-      {" "}
-      <Box
-        elevation={2}
-        sx={{
-          border: "1px solid ",
-          borderColor: "#B5B6B6  ",
-          paddingBottom: "50px",
-        }}
-      >
+    <Grid
+      container
+      spacing={1}
+      display="flex"
+      justifyContent="center"
+      sx={{ border: "1px solid ", borderColor: "#C9CAC7" }}
+    >
+      <Grid item xs={12}>
         <Typography
           variant={xs ? "h5" : sm ? "h5" : md ? "h5" : lg ? "h4" : "h5"}
           sx={{
@@ -40,32 +39,28 @@ const ContactAgent = () => {
             fontWeight: "bold",
           }}
         >
-          {" "}
           Contact Agent
         </Typography>
         <Divider />
-        <Box sx={{ display: "flex", justifyContent: "center", mt: "15px" }}>
-          <CardMedia
-            component="img"
-            image="/alula.jpg"
-            alt="alt"
-            sx={{
-              height: {
-                lg: "250px",
-                md: "200px",
-                sm: "300px",
-                xs: "200px",
-              },
-              width: {
-                lg: "250px",
-                md: "250px",
-                sm: "300px",
-                xs: "200px",
-              },
-              borderRadius: "50%",
-            }}
-          />
-        </Box>
+      </Grid>
+      <Grid item xs={12} sx={{ justifyContent: "center", display: "flex" }}>
+        <CardMedia
+          component="img"
+          sx={{
+            width: {
+              md: "200px",
+              xs: "150px",
+            },
+            height: {
+              xs: "150px",
+              md: "200px",
+            },
+          }}
+          image="/alula.jpg"
+          alt="alt"
+        />
+      </Grid>
+      <Grid item xs={12}>
         <Typography
           variant={xs ? "h5" : md ? "h5" : "h5"}
           sx={{
@@ -74,81 +69,63 @@ const ContactAgent = () => {
             fontFamily: "Roboto",
             justifyContent: "center",
             color: themes.green.main,
-            fontweight: "bold",
+            fontWeight: "bold",
           }}
         >
-          {" "}
           Alula Tesfay
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            mt: "5px",
-          }}
-        >
-          <Box sx={{ textAlign: "left" }}>
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                mt: "10px",
-                fontFamily: "Roboto",
+      </Grid>
 
-                mb: "10px",
-                gap: "5px",
-              }}
-            >
-              {" "}
-              <PhoneIcon /> +251914524657
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                mt: "10px",
-                fontFamily: "Roboto",
-                textAlign: "left",
-                mb: "10px",
-                gap: "5px",
-              }}
-            >
-              {" "}
-              <EmailIcon /> alulatesfay444@gmail.com
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                mt: "10px",
-                fontFamily: "Roboto",
-                textAlign: "left",
-                mb: "10px",
-                gap: "5px",
-              }}
-            >
-              {" "}
-              <TelegramIcon />
-              https://t.me/realtoralula
-            </Typography>
-          </Box>
-        </Box>
-        {/* <Box sx={{ justifyContent: "center", display: "flex" }}>
-          <Button
-            style={{
-              textTransform: "none",
-
-              textAlign: "center",
-              backgroundColor: themes.green.main,
-              color: themes.mywhite.main,
+      <Grid
+        item
+        xs={12}
+        sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+      >
+        <Box>
+          <Typography
+            variant="h6"
+            sx={{
+              display: "flex",
+              mt: "10px",
+              fontFamily: "Roboto",
+              textAlign: "left",
+              mb: "10px",
+              gap: "5px",
             }}
           >
-            Send Him Notifice
-          </Button>
-        </Box> */}
-      </Box>
-    </>
+            <PhoneIcon /> +251914524657
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              display: "flex",
+              mt: "10px",
+              fontFamily: "Roboto",
+              textAlign: "left",
+              mb: "10px",
+              gap: "5px",
+            }}
+          >
+            <EmailIcon /> alulatesfay444@gmail.com
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              display: "flex",
+              mt: "10px",
+              fontFamily: "Roboto",
+              textAlign: "left",
+              mb: "10px",
+              gap: "5px",
+            }}
+          >
+            <TelegramIcon /> https://t.me/realtoralula
+          </Typography>
+        </Box>
+      </Grid>
+      <Grid item xs={12}></Grid>
+      <Grid item xs={12}></Grid>
+    </Grid>
   );
 };
 export default ContactAgent;

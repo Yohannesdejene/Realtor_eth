@@ -1,15 +1,23 @@
 import { useState, useEffect, useReducer, useSearchParams } from "react";
-import { Typography, Box, Button, Pagination, Divider } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Pagination,
+  Divider,
+  Container,
+  Grid,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
 import HomeCardSmall from "../Components/Home/HomeCardSmall";
+import ProductCard from "../Components/Home/ProductCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../Layouts/Footer";
 
 /////
 import { useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setHomes } from "../store/actions/HomesAction";
 import { setServiceTypeFilter } from "../store/actions/HomesAction";
 
 ///components
@@ -23,7 +31,7 @@ const HomeType = () => {
   const [loading, setLoading] = useState(true);
   ////store
   const dispatch = useDispatch();
-  const homes = useSelector((homes) => homes.homesReducer.homes);
+  const [homes, setHomes] = useState("");
   const filter = useSelector((homes) => homes.homesReducer.filters);
 
   ///pagination
@@ -50,8 +58,7 @@ const HomeType = () => {
           )
           .then((res) => {
             console.log("res", res);
-            dispatch(setHomes(res.data.houses));
-
+            setHomes(res.data.houses);
             const total = res.data.total;
             setTotalHomes(total);
             setTotalPages(Math.ceil(total / limit));
@@ -137,46 +144,46 @@ const HomeType = () => {
           flexDirection: "column",
         }}
       >
-        <Box
-          variant="h4"
-          sx={{
-            fontFamily: "Roboto",
-            fontWeight: "bold",
-
-            height: "50px",
-            fontSize: "22px",
-
-            ml: {
-              xs: "30px",
-            },
-            mb: "10px",
-          }}
+        <Typography
+          variant="h3"
+          sx={{ textTransform: "capitalize", m: "10px" }}
         >
-          {homeType.homeType[0].toLocaleUpperCase()}
-          {disp(homeType.homeType)}s
-        </Box>
+          {" "}
+          {homeType.homeType}s
+        </Typography>
         <Divider sx={{ mb: "10px", ml: "5px", mr: "5px" }} />
 
         <Box sx={{ mt: "10px", mb: "30px" }}>
           <FilterWithoutHomeType />
         </Box>
-        <Divider sx={{ mb: "10px", ml: "5px", mr: "5px" }} />
 
         <Box sx={{ textAlign: "center", justifyContent: "center" }}>
           {loading && <CircularProgress />}
         </Box>
-        {!loading && <HomeCardSmall cards={homes} />}
+        {!loading && (
+          <Grid container spacing={2}>
+            {homes.map((home) => (
+              <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                <ProductCard home={home} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
         {!loading && homes.length === 0 && (
           <Typography
             variant="h4"
-            sx={{ textAlign: "center", height: "50px", fontFamily: "Roboto" }}
+            sx={{ textAlign: "center", fontFamily: "Roboto" }}
           >
             No Filtred home
           </Typography>
         )}
-
         <Pagination
-          sx={{ display: "flex", justifyContent: "center", mt: "40px" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: "40px",
+            mb: "10px",
+          }}
           count={Math.ceil(totalHomes / limit)}
           page={currentPage}
           onChange={handlePageChange}

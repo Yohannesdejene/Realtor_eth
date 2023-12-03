@@ -8,10 +8,18 @@ import {
   useTheme,
   useMediaQuery,
   CircularProgress,
+  Container,
+  Grid,
+  CardMedia,
+  Card,
+  Divider,
 } from "@mui/material";
 
+//icons
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
+
 //react componenet
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 ///other imports
 import { toast } from "react-toastify";
@@ -27,29 +35,56 @@ import {
 ///componenets
 import ContactAgent from "../Components/Details/ContactAgent";
 import ImageCard from "../Components/Details/ImagesCard";
-import Description from "../Components/Details/Description";
+import ProductCard from "../Components/Home/ProductCard";
+
 import DetailTable from "../Components/Details/DetailTable";
-import HomeCardSmall from "../Components/Home/HomeCardSmall";
+import Neighborhood from "../Components/Details/Neighborhood";
+import Description from "../Components/Details/Description";
+import Discription from "../Components/Details/Discription";
+import DialogeBoxFull from "../Components/DialogeBoxFull";
+import { CommonBack, CommonButtonLink } from "../Components/CommonComponent";
 import Footer from "../Layouts/Footer";
 import api from "../Services/index";
+
 const Detail = () => {
   const parameter = useParams();
-  const xs = useMediaQuery("(max-width:600px)");
-  const sm = useMediaQuery("(max-width:900px)");
-  const md = useMediaQuery("(max-width:1200px)");
-  const lg = useMediaQuery("(min-width:1201px)");
   const dispatch = useDispatch();
-  const house = useSelector((house) => house.homesReducer.homeDetail);
+  const navigate = useNavigate();
   const similarList = useSelector((house) => house.homesReducer.homes);
-  const houseImages = useSelector((house) => house.homesReducer.detailImages);
 
-  const [laoding, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [laodingImages, setLoadingImages] = useState(true);
   const [loadingSimilar, setLoadingSimilar] = useState(true);
-  console.log("parameter", parameter);
+  const [dialogeValue, setDialogeValue] = useState(false);
+  const handleDialogeChange = () => {
+    setDialogeValue(!dialogeValue);
+    console.log("helo, value", dialogeValue);
+  };
+
   // console.log("house", houseImagess, houses);
   const theme = useTheme();
+
   const themes = theme.palette;
+
+  const [house, setHouse] = useState("");
+  const [houseImages, setHouseImages] = useState("");
+  const [similarHouse, setSimilarHouse] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % houseImages.length);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex - 1 + houseImages.length) % houseImages.length
+    );
+  };
+
+  const handleThumbnailClick = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   useEffect(() => {
     const fetchDetail = () => {
       try {
@@ -58,9 +93,9 @@ const Detail = () => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("response", res);
-            dispatch(setDetailHome(res.data.house));
-
+            console.log("response detail", res);
+            // dispatch(setDetailHome(res.data.house));
+            setHouse(res.data.house);
             setLoading(false);
           })
           .catch((err) => {
@@ -105,8 +140,7 @@ const Detail = () => {
           })
           .then((res) => {
             console.log("response", res);
-            dispatch(setDetailImages(res.data.houseImages));
-
+            setHouseImages(res.data.houseImages);
             setLoadingImages(false);
           })
           .catch((err) => {
@@ -151,7 +185,7 @@ const Detail = () => {
           })
           .then((res) => {
             console.log("response", res);
-            dispatch(setHomes(res.data.houses));
+            setSimilarHouse(res.data.houses);
 
             setLoadingSimilar(false);
           })
@@ -192,135 +226,142 @@ const Detail = () => {
     fetchImages();
     fetchLSimilarListing();
   }, []);
+  const content = () => {
+    return (
+      // <Container>
+      <ImageCard
+        handlePrevImage={handlePrevImage}
+        handleNextImage={handleNextImage}
+        handleDialogeChange={handleDialogeChange}
+        currentImageIndex={currentImageIndex}
+        houseImages={houseImages}
+        handleThumbnailClick={handleThumbnailClick}
+        dialogeValue={dialogeValue}
+      />
+      // </Container>
+    );
+  };
+
+  const onBack = () => {
+    navigate("/");
+  };
+  const LoadMoreHouse = () => {
+    navigate("/homes");
+  };
+
+  const handleDetail = (id) => {
+    console.log("redirecting");
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <>
       <Box
         sx={{
           mt: "100px",
           mb: "50px",
-          ml: {
-            lg: "5%",
-            md: "8%",
-            sm: "8%",
-            xs: "5%",
-          },
-          mr: {
-            lg: "3%",
-            md: "4%",
-            sm: "8%",
-            xs: "5%",
-          },
+          // ml: "5%",
+          // mr: "5%",
         }}
       >
-        <Button
-          component={Link}
-          href="/"
-          style={{
-            textTransform: "none",
-            fontFamily: "Roboto",
-            fontSize: xs
-              ? "12px"
-              : sm
-              ? "13px"
-              : md
-              ? "14px"
-              : lg
-              ? "16px"
-              : "15px",
-            color: themes.myblack.main,
-          }}
-        >
-          Back To Home
-        </Button>
-
-        <Box sx={{ display: "flex", mt: "20px", justyfyContent: "center" }}>
+        {loading ? (
           <Box
             sx={{
-              width: "100%",
               display: "flex",
-              flexDirection: xs
-                ? "column"
-                : sm
-                ? "column"
-                : md
-                ? "row"
-                : lg
-                ? "row"
-                : "row",
-              textalign: "center",
-              gap: "10px",
+              justifyContent: "center",
+              top: "50%",
             }}
           >
-            <Box
-              sx={{
-                width: {
-                  lg: "75%",
-                  md: "75%",
-                  sm: "100%",
-                  xs: "100%",
-                },
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              {!laodingImages && (
-                <ImageCard house={house} houseImages={houseImages} />
-              )}
-              {laodingImages && <CircularProgress />}
-            </Box>
-            <Box
-              sx={{
-                width: {
-                  lg: "25%",
-                  md: "25%",
-                  sm: "100%",
-                  xs: "100%",
-                },
-                height: "100pvh",
-              }}
-            >
-              <ContactAgent />
-            </Box>
+            <CircularProgress />
           </Box>
-        </Box>
-        {!laoding && <Description house={house} />}
-        {laoding && <CircularProgress />}
+        ) : (
+          <>
+            <Container>
+              {" "}
+              <CommonBack label="Back to Home" onClick={onBack} />
+              <Grid container spacing="20px">
+                <Grid item xs={12} sm={9}>
+                  {/* <Container> */}
+                  <ImageCard
+                    handlePrevImage={handlePrevImage}
+                    handleNextImage={handleNextImage}
+                    handleDialogeChange={handleDialogeChange}
+                    currentImageIndex={currentImageIndex}
+                    houseImages={houseImages}
+                    handleThumbnailClick={handleThumbnailClick}
+                    dialogeValue={dialogeValue}
+                  />
+                  {/* </Container> */}
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <ContactAgent />
+                </Grid>
+                <Grid item xs={12} sm={5}>
+                  <Discription house={house} />
+                </Grid>
+                <Divider
+                  orientation="vertical"
+                  sx={{ color: "#000000" }}
+                  flexItem
+                />
 
-        <DetailTable house={house} />
+                <Grid item xs={12} sm={6}>
+                  <Description house={house} />
+                </Grid>
+              </Grid>
+              <DialogeBoxFull
+                dialogeValue={dialogeValue}
+                handleDialogeChange={handleDialogeChange}
+                Content={content}
+              />
+            </Container>
+            <Container>
+              <Grid container spacing={5}>
+                <Grid item xs={12} sm={6}>
+                  <DetailTable house={house} />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <Neighborhood house={house} />
+                </Grid>
+              </Grid>
+            </Container>
+            <Container>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: "21px",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  mb: "20px",
+                  mt: "40px",
+                }}
+              >
+                Similar Listing
+              </Typography>
+              <Grid container spacing="10px">
+                {similarHouse &&
+                  similarHouse.map((home) => (
+                    <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                      <ProductCard home={home} />
+                    </Grid>
+                  ))}
+              </Grid>
+              <Box
+                sx={{ display: "flex", justifyContent: "center", mt: "20px" }}
+              >
+                <CommonButtonLink
+                  label="Load More houses"
+                  handleClick={LoadMoreHouse}
+                />
+              </Box>
+            </Container>
+          </>
+        )}
+
         {/* <GoogleMapBox /> */}
-        <Typography
-          variant="h4"
-          sx={{
-            fontSize: "21px",
-            fontFamily: "Roboto",
-            fontWeight: "bold",
-            mb: "20px",
-            mt: "40px",
-          }}
-        >
-          Similar Listing
-        </Typography>
-        {laoding && <CircularProgress />}
-        {!laoding && <HomeCardSmall cards={similarList} />}
-
-        <Button
-          style={{
-            marginTop: "25px",
-            fontFamily: "Roboto",
-            textAlign: "center",
-            fontWeight: "bold",
-            color: themes.green.main,
-            textTransform: "none",
-            fontSize: "17px",
-            display: "flex",
-          }}
-          component={Link}
-          href={"/homes"}
-        >
-          Load more houses
-        </Button>
       </Box>
-      <Footer />
+      {!loading && <Footer />}
     </>
   );
 };

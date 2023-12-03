@@ -1393,236 +1393,237 @@ const Filter = () => {
   const CategoryListDesktop = () => {
     return (
       <>
-        <FormControl variant="outlined">
-          <InputLabel id="category-label">House Type </InputLabel>
-          <Select
-            // multiple
-            required
-            labelId="houseType"
-            id="houseType"
-            style={{
-              minWidth: "150px",
+        <Box sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+          <FormControl variant="outlined">
+            <InputLabel id="category-label">House Type </InputLabel>
+            <Select
+              // multiple
+              required
+              labelId="houseType"
+              id="houseType"
+              style={{
+                minWidth: "150px",
 
-              borderRadius: "20px",
-              height: "35px",
-            }}
-            value={filter.houseType}
-            // onChange={handleCategory}
-            onChange={(e) => dispatch(setHouseTypeFilter(e.target.value))}
-          >
-            {houseType.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel id="location-label">Subcity</InputLabel>
-          <Select
-            required
-            labelId="subcity"
-            id="subcities"
-            style={{
-              // maxWidth: "500px",
-              minWidth: "150px",
+                borderRadius: "20px",
+                height: "35px",
+              }}
+              value={filter.houseType}
+              // onChange={handleCategory}
+              onChange={(e) => dispatch(setHouseTypeFilter(e.target.value))}
+            >
+              {houseType.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="location-label">Subcity</InputLabel>
+            <Select
+              required
+              labelId="subcity"
+              id="subcities"
+              style={{
+                // maxWidth: "500px",
+                minWidth: "150px",
+                // maxHeight: "50px",
+                borderRadius: "20px",
+                height: "35px",
+              }}
+              value={filter.subcity}
+              // onChange={handleLocation}
+              onChange={(e) => dispatch(setSubcityFilter(e.target.value))}
+            >
+              {subcity.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="location-label">Service Type</InputLabel>
+            <Select
+              required
+              labelId="serviceType"
+              id="servicetype"
+              style={{
+                // maxWidth: "500px",
+
+                minWidth: "150px",
+                // maxHeight: "50px",
+                borderRadius: "20px",
+                height: "35px",
+              }}
+              value={filter.serviceType}
+              // onChange={handlePropertyType}
+              onChange={(e) => dispatch(setServiceTypeFilter(e.target.value))}
+            >
+              {serviceType.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="bedrooms-label">Bed Rooms count</InputLabel>
+            <Select
+              required
+              labelId="bedrooms-label"
+              id="bedrooms"
+              name="bedrooms"
+              sx={{
+                borderRadius: "20px",
+                // maxWidth: "500px",
+                minWidth: "150px",
+                height: "35px",
+              }}
+              value={filter.bedrooms}
+              onChange={(e) => dispatch(setBedroomsFilter(e.target.value))}
+            >
+              {bedrooms.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="bath rooms-label">Bath rooms count</InputLabel>
+            <Select
+              required
+              labelId="bath rooms"
+              id="bath rooms"
+              name="bathrooms"
+              sx={{
+                borderRadius: "20px",
+                // maxWidth: "500px",
+                minWidth: "150px",
+                height: "35px",
+              }}
+              value={filter.bathrooms}
+              onChange={(e) => dispatch(setBathroomsFilter(e.target.value))}
+            >
+              {bathrooms.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="Minimum area Size-label">
+              {" "}
+              Minimum area Size
+            </InputLabel>
+            <Select
+              required
+              labelId="Minimum area Size-label"
+              id="Minimum area Size"
+              sx={{
+                borderRadius: "20px",
+                // maxWidth: "500px",
+                minWidth: "150px",
+                height: "35px",
+              }}
+              value={filter.minArea}
+              onChange={(e) => dispatch(setMinAreaFilter(e.target.value))}
+            >
+              {minArea.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="Max area Size-label">Max area Size</InputLabel>
+            <Select
+              required
+              labelId="Max area Size"
+              id="Max area Size"
+              sx={{
+                borderRadius: "20px",
+                // maxWidth: "500px",
+                minWidth: "150px",
+                height: "35px",
+              }}
+              value={filter.maxArea}
+              onChange={(e) => dispatch(setMaxAreaFilter(e.target.value))}
+            >
+              {maxArea.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel id="furnished-label">Funishing Type</InputLabel>
+            <Select
+              labelId="furnishingType"
+              id="furnishingType"
+              style={{
+                // maxWidth: "500px",
+                minWidth: "150px",
+                // maxHeight: "50px",
+                borderRadius: "20px",
+                height: "35px",
+              }}
+              value={filter.furnishingType}
+              onChange={(e) =>
+                dispatch(setFurnishingTypeFilter(e.target.value))
+              }
+            >
+              {furnishingType.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            type="number"
+            value={filter.minPrice}
+            inputProps={{ min: 0 }}
+            label="Min Price"
+            placeholder="Example 10000"
+            sx={{
+              "& .MuiInputBase-input": {
+                height: "6px",
+              },
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
+              },
+
+              minWidth: "50px",
               // maxHeight: "50px",
-              borderRadius: "20px",
-              height: "35px",
             }}
-            value={filter.subcity}
-            // onChange={handleLocation}
-            onChange={(e) => dispatch(setSubcityFilter(e.target.value))}
-          >
-            {subcity.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            onChange={(e) => dispatch(setMinPriceFilter(e.target.value))}
+          />
+          <TextField
+            type="number"
+            value={filter.maxPrice}
+            label="MaxPrice"
+            placeholder="Example 10000"
+            inputProps={{ min: 0 }}
+            sx={{
+              "& .MuiInputBase-input": {
+                height: "8px",
+              },
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
+              },
 
-        <FormControl variant="outlined">
-          <InputLabel id="location-label">Service Type</InputLabel>
-          <Select
-            required
-            labelId="serviceType"
-            id="servicetype"
-            style={{
               // maxWidth: "500px",
-
-              minWidth: "150px",
+              minWidth: "100px",
               // maxHeight: "50px",
-              borderRadius: "20px",
-              height: "35px",
             }}
-            value={filter.serviceType}
-            // onChange={handlePropertyType}
-            onChange={(e) => dispatch(setServiceTypeFilter(e.target.value))}
-          >
-            {serviceType.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl variant="outlined">
-          <InputLabel id="bedrooms-label">Bed Rooms count</InputLabel>
-          <Select
-            required
-            labelId="bedrooms-label"
-            id="bedrooms"
-            name="bedrooms"
-            sx={{
-              borderRadius: "20px",
-              // maxWidth: "500px",
-              minWidth: "150px",
-              height: "35px",
-            }}
-            value={filter.bedrooms}
-            onChange={(e) => dispatch(setBedroomsFilter(e.target.value))}
-          >
-            {bedrooms.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel id="bath rooms-label">Bath rooms count</InputLabel>
-          <Select
-            required
-            labelId="bath rooms"
-            id="bath rooms"
-            name="bathrooms"
-            sx={{
-              borderRadius: "20px",
-              // maxWidth: "500px",
-              minWidth: "150px",
-              height: "35px",
-            }}
-            value={filter.bathrooms}
-            onChange={(e) => dispatch(setBathroomsFilter(e.target.value))}
-          >
-            {bathrooms.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl variant="outlined">
-          <InputLabel id="Minimum area Size-label">
-            {" "}
-            Minimum area Size
-          </InputLabel>
-          <Select
-            required
-            labelId="Minimum area Size-label"
-            id="Minimum area Size"
-            sx={{
-              borderRadius: "20px",
-              // maxWidth: "500px",
-              minWidth: "150px",
-              height: "35px",
-            }}
-            value={filter.minArea}
-            onChange={(e) => dispatch(setMinAreaFilter(e.target.value))}
-          >
-            {minArea.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel id="Max area Size-label">Max area Size</InputLabel>
-          <Select
-            required
-            labelId="Max area Size"
-            id="Max area Size"
-            sx={{
-              borderRadius: "20px",
-              // maxWidth: "500px",
-              minWidth: "150px",
-              height: "35px",
-            }}
-            value={filter.maxArea}
-            onChange={(e) => dispatch(setMaxAreaFilter(e.target.value))}
-          >
-            {maxArea.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel id="furnished-label">Funishing Type</InputLabel>
-          <Select
-            labelId="furnishingType"
-            id="furnishingType"
-            style={{
-              // maxWidth: "500px",
-              minWidth: "150px",
-              // maxHeight: "50px",
-              borderRadius: "20px",
-              height: "35px",
-            }}
-            value={filter.furnishingType}
-            onChange={(e) => dispatch(setFurnishingTypeFilter(e.target.value))}
-          >
-            {furnishingType.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          type="number"
-          value={filter.minPrice}
-          inputProps={{ min: 0 }}
-          label="Min Price"
-          placeholder="Example 10000"
-          sx={{
-            "& .MuiInputBase-input": {
-              height: "6px",
-            },
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "20px",
-            },
-
-            minWidth: "50px",
-            // maxHeight: "50px",
-          }}
-          onChange={(e) => dispatch(setMinPriceFilter(e.target.value))}
-        />
-        <TextField
-          type="number"
-          value={filter.maxPrice}
-          label="MaxPrice"
-          placeholder="Example 10000"
-          inputProps={{ min: 0 }}
-          sx={{
-            "& .MuiInputBase-input": {
-              height: "8px",
-            },
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "20px",
-            },
-
-            // maxWidth: "500px",
-            minWidth: "100px",
-            // maxHeight: "50px",
-          }}
-          onChange={(e) => dispatch(setMaxPriceFilter(e.target.value))}
-        />
+            onChange={(e) => dispatch(setMaxPriceFilter(e.target.value))}
+          />
+        </Box>
       </>
     );
   };

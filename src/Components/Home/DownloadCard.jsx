@@ -9,218 +9,190 @@ import {
   CardMedia,
   CardContent,
   useMediaQuery,
+  Grid,
+  Tooltip,
 } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
+import {
+  CommonTypography,
+  DescWritter,
+  CommonButtonLink,
+} from "../CommonComponent/index";
+import VideoPlayer from "../VideoPlayer";
 
 const DownloadCard = () => {
-  const sm = useMediaQuery("(max-width:600px)");
-  const md = useMediaQuery("(max-width:960px)");
-  const lg = useMediaQuery("(max-width:1280px)");
   const theme = useTheme();
   const themes = theme.palette;
+  const MoreButton = styled(Button)(({ theme }) => ({
+    backgroundColor: themes.green.main,
+    color: themes.white.main,
+    padding: "10px 20px",
+    borderRadius: "5px",
+    textTransform: "none",
+
+    ":hover": {
+      backgroundColor: themes.green.main,
+      color: themes.white.main,
+    },
+  }));
   return (
-    <Box className="downloadApp" sx={{ mt: "40px" }}>
-      <Box
-        sx={{
-          display: "flex",
-          // m: "5%",
-          flexDirection: {
-            xs: "column",
-            sm: "column",
-            md: "row",
-          },
-          alignItems: "center",
-          mt: "30px",
-          gap: "100px",
-          textAlign: "center",
-        }}
+    <Grid
+      container
+      justifyContent="center"
+      spacing={5}
+      sx={{ alignItems: "center", height: "100%" }}
+    >
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={6}
+        lg={6}
+        justifyContent="center"
+        sx={{ height: "100%" }}
       >
-        <Box
+        {/* <CardMedia
+          component="img"
+          src="/Images/business.png"
+          alt="Business"
           sx={{
-            width: {
-              lg: "50%",
-              md: "50%",
-              sm: "70%",
-              xs: "100%",
-            },
-
-            position: "relative",
-
-            height: {
-              lg: "400px",
-              md: "250px",
-              sm: "300px",
-              xs: "200px",
-            },
+            maxWidth: "100%",
           }}
-        >
-          <Box sx={{ width: "100%", height: "100%" }}>
-            <img
-              src="/Images/businessf.png"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          </Box>
-          <Typography variant={sm ? "h5" : "h4"} sx={{ fontWeight: 700 }}>
-            Become Realtor agent
-          </Typography>
-          <Typography
-            variant={sm ? "h6" : "h5"}
-            component={Link}
-            href="/becomeagent"
-            sx={{
-              fontSize: {
-                lg: "17px",
-                xs: "15px",
-              },
-              fontWeight: 700,
-              textDecoration: "none",
-              justifyContent: "center",
-              ml: "10px",
-              mr: "5px",
-              color: themes.green.main,
-              ":hover": {
-                textDecoration: "underline",
-              },
-            }}
-          >
-            Register here
-          </Typography>
-        </Box>
+        />
+
         <Box
-          className="get out app"
           sx={{
+            maxWidth: "100%",
             display: "flex",
-            flexDirection: {
-              lg: "row",
-              md: "row",
-              sm: "column",
-              xs: "column",
-            },
-            width: {
-              lg: "50%",
-              md: "50%",
-              sm: "80%",
-              xs: "100%",
-            },
-            gap: {
-              lg: "10px",
-              md: "6px",
-              sm: "10px",
-            },
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "10px",
           }}
         >
-          <Box
-            sx={{
-              textAlign: "center",
-              position: "relative",
-              borderRadius: "20px",
-              overflow: "hidden",
-            }}
-          >
-            <img
+          <CommonTypography label=" Become Realtor agent" />
+
+          <CommonButtonLink label="Register here" route="/becomeagent" />
+        </Box> */}
+        <Box sx={{ height: "100%" }}>
+          <VideoPlayer videoId="gxNl9TQ3fqc" />
+        </Box>
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={6} lg={6}>
+        <Grid
+          container
+          justifyContent="center"
+          spacing={4}
+          sx={{ width: "100%" }}
+        >
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <CardMedia
+              component="img"
               src="Images/phone.png"
               alt="Phone"
-              style={{
+              sx={{
                 width: "100%",
-                height: "100%",
-                objectFit: "cover",
               }}
             />
-          </Box>
-
-          <Box
-            className="Download Text"
-            sx={{
-              padding: "10px",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "18px",
-              borderRadius: "5px",
-              width: "100%",
-              justifyContent: "center",
-            }}
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            lg={6}
+            container
+            direction="column"
+            justifyContent="center"
+            spacing={2}
           >
-            <Typography
-              variant="h3"
-              sx={{
-                fontWeight: 700,
-                mt: {
-                  sm: "20px",
-                  md: "20px",
-                  lg: "50px",
-                  xs: "5px",
-                },
-                mb: {
-                  lg: "10px",
-                  md: "8px",
-                  sm: "10px",
-                  xs: "5px",
-                },
-              }}
-            >
-              Try our App
-            </Typography>
-            <Typography
-              variant={sm ? "h6" : "h5"}
-              sx={{
-                mb: {
-                  lg: "30px",
-                  md: "30px",
-                  sm: "30px",
-                  xs: "20px",
-                },
-              }}
-            >
-              Experience the best your neighborhood has to offer, all in one
-              app.
-            </Typography>
+            <Box sx={{ alignItems: "center" }}>
+              <CommonTypography label="Try our app" />
+              <DescWritter
+                label="  Experience the best your neighborhood has to offer, all in one
+                app."
+              />
 
-            <Box
-              sx={{
-                width: "100%",
-                maxWidth: 170,
-                margin: "0 auto",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexWrap: "wrap",
-              }}
-            >
-              <Link href="https://play.google.com/store/apps/details?id=com.maz.realtor">
-                <CardMedia
-                  component="img"
-                  image="/Images/android.png"
-                  alt="Android"
-                  sx={{
-                    width: "100%",
-                    height: "auto",
-                    borderRadius: "10px",
-                    marginBottom: "10px",
-                  }}
-                />
-              </Link>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                spacing={2}
+                marginTop="20px"
+                sx={{ alignItems: "center" }}
+              >
+                <Grid item>
+                  <Link
+                    sx={{ display: "flex", justifyContent: "center" }}
+                    href="https://play.google.com/store/apps/details?id=com.maz.realtor"
+                  >
+                    <CardMedia
+                      component="img"
+                      src="/Images/android.png"
+                      alt="Android"
+                      sx={{
+                        width: "60%",
+                        borderRadius: "10px",
 
-              <Link href="https://play.google.com/store/apps/details?id=com.maz.realtor">
-                <CardMedia
-                  component="img"
-                  image="/Images/ios.png"
-                  alt="iOS"
-                  sx={{
-                    width: "100%",
-                    height: "auto",
-                    borderRadius: "10px",
-                  }}
-                />
-              </Link>
+                        objectFit: "contain",
+                      }}
+                    />
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Tooltip title="Comming soon...">
+                    <Link
+                      title="Coming soon"
+                      sx={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <CardMedia
+                        component="img"
+                        src="/Images/ios.png"
+                        alt="iOS"
+                        sx={{
+                          width: "60%",
+                          borderRadius: "10px",
+
+                          objectFit: "contain",
+                        }}
+                      />
+                    </Link>
+                  </Tooltip>
+                </Grid>
+              </Grid>
             </Box>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 export default DownloadCard;
+
+//  <Grid item xs={12} sm={12} md={6} lg={6} justifyContent="center">
+//         <CardMedia
+//           component="img"
+//           src="/Images/business.png"
+//           alt="Business"
+//           sx={{
+//             maxWidth: "100%",
+//           }}
+//         />
+
+//         <Box
+//           sx={{
+//             maxWidth: "100%",
+//             display: "flex",
+//             justifyContent: "center",
+//             flexDirection: "column",
+//             alignItems: "center",
+//             gap: "10px",
+//           }}
+//         >
+//           <CommonTypography label=" Become Realtor agent" />
+
+//           <CommonButtonLink label="Register here" route="/becomeagent" />
+//         </Box>
+
+//       </Grid>

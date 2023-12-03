@@ -11,6 +11,7 @@ import {
   IconButton,
   InputAdornment,
   Stack,
+  Grid,
   Tooltip,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
@@ -25,7 +26,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
 
 ///componenets
-import HomeCardSmall from "../Components/Home/HomeCardSmall";
+import ProductCard from "../Components/Home/ProductCard";
 import Footer from "../Layouts/Footer";
 
 ////sores
@@ -127,67 +128,60 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(setSearch(query));
+    const fetchSearch = () => {
+      setLoadings(true);
+      try {
+        api
+          .get(`/unauth/house/search?offset=${currentPage}&search=${search}`, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("response", res.data.searchresults);
+            dispatch(setHomes(res.data.searchresults));
+            setTotalHomes(res.data.total);
+            setLoadings(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoadings(false);
+            toast.error(
+              "Can't search home .check your internet connection",
+              {
+                autoClose: 3000,
+              },
+              {
+                // Set the background color
+                backgroundColor: themes.green.main,
+                // Set the text color
+                color: themes.white.main,
+              }
+            );
+          });
+      } catch (err) {
+        setLoadings(false);
+        console.log(err);
+        toast.error(
+          "Can't search home .check your internet connection",
+          {
+            autoClose: 3000,
+          },
+          {
+            backgroundColor: themes.green.main,
+            color: themes.white.main,
+          }
+        );
+      }
+    };
     fetchSearch();
   }, [currentPage]);
-
-  const fetchSearch = () => {
-    setLoadings(true);
-    try {
-      api
-        .get(`/unauth/house/search?offset=${currentPage}&search=${search}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log("response", res.data.searchresults);
-          dispatch(setHomes(res.data.searchresults));
-          setTotalHomes(res.data.total);
-          setLoadings(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoadings(false);
-          toast.error(
-            "Can't search home .check your internet connection",
-            {
-              autoClose: 3000,
-            },
-            {
-              // Set the background color
-              backgroundColor: themes.green.main,
-              // Set the text color
-              color: themes.white.main,
-            }
-          );
-        });
-    } catch (err) {
-      setLoadings(false);
-      console.log(err);
-      toast.error(
-        "Can't search home .check your internet connection",
-        {
-          autoClose: 3000,
-        },
-        {
-          backgroundColor: themes.green.main,
-          color: themes.white.main,
-        }
-      );
-    }
-  };
 
   return (
     <>
       <Box
         sx={{
           height: "auto",
-          marginLeft: {
-            sm: "5%",
-            xs: "2%",
-          },
-          marginRight: {
-            sm: "5%",
-            xs: "2%",
-          },
+          ml: "5%",
+          mr: "5%",
           marginTop: "80px",
           dsiplay: "flex",
         }}
@@ -341,7 +335,16 @@ const Search = () => {
             </div>
           ) : (
             <>
-              <HomeCardSmall cards={homes} />
+              {!loadings && (
+                <Grid container spacing={2}>
+                  {homes.map((home) => (
+                    <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                      <ProductCard home={home} />
+                    </Grid>
+                  ))}
+                </Grid>
+              )}
+
               <Box
                 sx={{ display: "flex", justifyContent: "center", mt: "50px" }}
               >

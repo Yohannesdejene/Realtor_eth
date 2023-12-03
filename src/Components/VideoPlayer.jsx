@@ -7,8 +7,8 @@ const VideoPlayer = ({ videoId }) => {
   const playerRef = useRef(null);
 
   const opts = {
-    height: "300",
     width: "100%",
+
     playerVars: {
       autoplay: 0,
     },

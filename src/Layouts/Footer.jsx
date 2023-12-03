@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   Container,
+  CardMedia,
   Typography,
   List,
   ListItem,
@@ -11,8 +12,10 @@ import {
   Divider,
   useMediaQuery,
   Button,
+  Grid,
+  IconButton,
 } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import { useTheme, styled } from "@mui/material/styles";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -20,6 +23,14 @@ import EmailIcon from "@mui/icons-material/Email";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { updateLogin } from "../store/actions/ToogleAction";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+
+////
+import { FootorTypography } from "../Components/CommonComponent/index";
+import {
+  FootorTypographyList,
+  FooterButton,
+} from "../Components/CommonComponent/index";
 
 const AboutList = [
   {
@@ -64,348 +75,172 @@ const getAppList = [
 ];
 
 const Footer = () => {
-  const sm = useMediaQuery("(max-width:600px)");
-  const md = useMediaQuery("(max-width:960px)");
-  const lg = useMediaQuery("(max-width:1280px)");
+  const navigate = useNavigate();
   const theme = useTheme();
   const themes = theme.palette;
   const login = useSelector((user) => user.tooglesReducer.login);
   ///store dispatch
   const dispatch = useDispatch();
 
-  console.log("lllo", login);
-
   ///handle login toggle
   const handleLoginToggle = () => {
     console.log("clicked");
-    dispatch(updateLogin(true));
   };
 
+  const handleLogin = () => {
+    dispatch(updateLogin(true));
+  };
+  const handleRegsiter = () => {
+    dispatch(updateLogin(true));
+  };
+  const hanldeAboutUs = () => {
+    navigate("/becomeagent");
+  };
+  const hanldeFindeRealtor = () => {
+    navigate("/becomeagent");
+  };
   return (
     <>
-      <footer
-        style={{
-          marginTop: "100px",
-          display: "flex",
-          flexDirection: {
-            lg: "row",
-            md: "row",
-            sm: "column",
-            xs: "column",
-          },
-          backgroundColor: themes.black.main,
+      <Box
+        sx={{
+          bottom: 0,
+          padding: "2%",
+          backgroundColor: "#000000",
         }}
       >
         <Divider sx={{ mb: "30px" }} />
         <Container>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: {
-                lg: "row",
-                md: "row",
-                sm: "column",
-                xs: "column",
-              },
-            }}
-          >
-            <Box>
-              <Box
+          <Grid container spacing={5} sx={{ width: "100%" }}>
+            <Grid item xs={12} md={3}>
+              {/* <Box sx={{ maxWidth: "100%" }}> */}
+              <CardMedia
+                component="img"
+                src="/Images/logowhite.png"
+                alt="Logo"
                 sx={{
-                  width: "100px",
-                  height: "100px",
-                  mr: "10px",
-                  display: "flex",
-                  alignitem: "center",
-                }}
-              >
-                <img style={{ width: "100%" }} src="/Images/logo1.png" />
-              </Box>
-              <Box>
-                <Typography
-                  variant="h5"
-                  sx={{ mt: "10px", color: themes.white.main }}
-                >
-                  For you dream home{" "}
-                </Typography>
-              </Box>
-              <Box>
-                <List
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: "0px",
-                  }}
-                >
-                  <ListItem
-                    component={Link}
-                    href="https://www.facebook.com/REALTOReth"
-                    sx={{ width: "30px" }}
-                  >
-                    <FacebookIcon />
-                  </ListItem>
-                  <ListItem
-                    component={Link}
-                    href="https://www.facebook.com/REALTOReth"
-                    sx={{ width: "30px" }}
-                  >
-                    <LinkedInIcon />
-                  </ListItem>
-                  <ListItem
-                    component={Link}
-                    href="https://t.me/realtoreth"
-                    sx={{ width: "30px" }}
-                  >
-                    <TelegramIcon />
-                  </ListItem>
-                  <ListItem
-                    component={Link}
-                    href="https://alulatesfaye44@gmail.com"
-                    sx={{ width: "30px" }}
-                  >
-                    <EmailIcon />
-                  </ListItem>
-                </List>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-                ml: {
-                  md: "100px",
-                  xs: "20px",
-                },
-                gap: {
-                  lg: "100px",
-                  md: "50px",
-                  sm: "10px",
-                  xs: "5px",
-                },
-              }}
-            >
-              <Box>
-                <Box>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: themes.green.main,
-                      fontFamily: "Roboto",
-                      fontSize: {
-                        lg: "25px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      ml: "15px",
-                      mt: "35px",
-                    }}
-                  >
-                    About
-                  </Typography>
-                </Box>
-
-                <List sx={{ display: "flex", flexDirection: "column" }}>
-                  {/* {AboutList.map((value, index) => (
-                    <ListItem
-                      key={index}
-                      component={Button}
-                      sx={{
-                        fontSize: {
-                          lg: "17px",
-                          md: "15px",
-                          sm: "13px",
-                        },
-                        fontFamily: "Roboto",
-                        color: themes.white.main,
-                      }}
-                    >
-                      {value.value}
-                    </ListItem>
-                  ))} */}
-
-                  <Button
-                    sx={{
-                      textTransform: "none",
-
-                      fontSize: {
-                        lg: "17px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      fontFamily: "Roboto",
-                      color: themes.white.main,
-                    }}
-                  >
-                    About Us
-                  </Button>
-                  <Button
-                    sx={{
-                      textTransform: "none",
-
-                      fontSize: {
-                        lg: "17px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      fontFamily: "Roboto",
-                      color: themes.white.main,
-                    }}
-                  >
-                    Find realtor
-                  </Button>
-                </List>
-              </Box>
-
-              <Box sx={{ textAlign: "left" }}>
-                <Box>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: themes.green.main,
-                      fontFamily: "Roboto",
-                      fontSize: {
-                        lg: "25px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      ml: "15px",
-                      mt: "35px",
-                      textAlign: "center",
-                    }}
-                  >
-                    Contact us
-                  </Typography>
-                </Box>
-
-                <List
-                  sx={{
-                    display: "flex",
-                    textAlign: "left",
-
-                    flexDirection: "column",
-                  }}
-                >
-                  <Button
-                    sx={{
-                      textTransform: "none",
-
-                      fontSize: {
-                        lg: "17px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      fontFamily: "Roboto",
-                      color: themes.white.main,
-                    }}
-                  >
-                    Help Center
-                  </Button>
-                  <Button
-                    sx={{
-                      textTransform: "none",
-
-                      fontSize: {
-                        lg: "17px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      fontFamily: "Roboto",
-                      color: themes.white.main,
-                    }}
-                  >
-                    Call: +251 91 451 4657
-                  </Button>
-                  <Button
-                    sx={{
-                      textTransform: "none",
-
-                      fontSize: {
-                        lg: "17px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      fontFamily: "Roboto",
-                      color: themes.white.main,
-                    }}
-                  >
-                    Email: alulatesfaye44@gmail.com
-                  </Button>
-                </List>
-              </Box>
-              <Box
-                sx={{
-                  marginLeft: {
-                    lg: "30px",
+                  // width: "100%",
+                  height: {
+                    sm: "80px",
+                    xs: "40px",
+                  },
+                  width: {
+                    sm: "80px",
+                    xs: "40px",
                   },
                 }}
+              />
+              {/* </Box> */}
+              <Typography
+                variant="h5"
+                sx={{ mt: "10px", color: themes.white.main }}
               >
-                <Box>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: themes.green.main,
-                      fontFamily: "Roboto",
-                      fontSize: {
-                        lg: "25px",
-                        md: "15px",
-                        sm: "13px",
-                      },
-                      ml: "15px",
-                      mt: "35px",
-                    }}
+                For you dream home{" "}
+              </Typography>
+              <Grid container spacing="1px">
+                <Grid item>
+                  <IconButton
+                    onClick={() =>
+                      window.open(
+                        "https://www.facebook.com/REALTOReth",
+                        "_blank"
+                      )
+                    }
+                    sx={{ color: "#ffffff" }}
                   >
-                    User
-                  </Typography>
-                </Box>
+                    <FacebookIcon color="#ffffff" />
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton
+                    onClick={() =>
+                      window.open(
+                        "https://www.linkedin.com/company/realtoreth",
+                        "_blank"
+                      )
+                    }
+                    sx={{ color: "#ffffff" }}
+                  >
+                    <LinkedInIcon color="#ffffff" />
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton
+                    onClick={() =>
+                      window.open("https://t.me/realtoreth", "_blank")
+                    }
+                    sx={{ color: "#ffffff" }}
+                  >
+                    <TelegramIcon color="#ffffff" />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Grid
+                container
+                spacing="1px"
+                direction="column"
+                alignItems="flex-start"
+              >
+                <Grid item sx={{ textAlign: "left" }}>
+                  <FootorTypography label="About us " />
+                </Grid>
+                <Grid item>
+                  <FooterButton label="About us " handleClick={hanldeAboutUs} />
+                </Grid>
+                <Grid item>
+                  <FooterButton
+                    label="Find Realtor "
+                    handleClick={hanldeFindeRealtor}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Grid
+                container
+                spacing={1}
+                direction="column"
+                alignItems="flex-start"
+              >
+                <Grid item display="flex" gap="10px" justifyContent="center">
+                  <FootorTypography label="Contact us " />
+                </Grid>
+                <Grid item display="flex" gap="10px">
+                  <FootorTypographyList label=" Call " />
+                  <FootorTypographyList label=" +251960405555" />
+                </Grid>
+                <Grid item display="flex" gap="10px">
+                  <FootorTypographyList label="Email  " />
+                  <FootorTypographyList label="realtoreth@gmail.com" />
+                </Grid>
+              </Grid>
+            </Grid>
 
-                <List sx={{ display: "flex", flexDirection: "column" }}>
-                  {userList.map((value, index) => (
-                    <ListItem
-                      key={index}
-                      component={Button}
-                      onClick={handleLoginToggle}
-                      sx={{
-                        textTransform: "none",
-                        fontSize: {
-                          lg: "17px",
-                          md: "15px",
-                          sm: "13px",
-                        },
-                        fontFamily: "Roboto",
-                        color: themes.white.main,
-                      }}
-                    >
-                      {value.value}
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            </Box>
-          </Box>
+            <Grid item xs={12} md={3}>
+              <Grid
+                container
+                spacing="1px"
+                direction="column"
+                alignItems="flex-start"
+              >
+                <Grid item sx={{ textAlign: "left" }}>
+                  <FootorTypography label="Users" />
+                </Grid>
+                <Grid item>
+                  <FooterButton label="Login " handleClick={handleLogin} />
+                </Grid>
+                <Grid item>
+                  <FooterButton
+                    label="Register "
+                    handleClick={handleRegsiter}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </Container>
-      </footer>
-      <div style={{ backgroundColor: themes.black.main, height: "50px" }}>
-        <Divider
-          sx={{
-            mb: "10px",
-            backgroundColor: themes.grey.main,
-            color: themes.white.main,
-          }}
-        />
-        <Typography
-          variant="h5"
-          sx={{
-            mt: "0px",
-            display: "flex",
-            justifyContent: "center",
-            color: themes.white.main,
-          }}
-        >
-          @2023 Realtoreth
-        </Typography>
-      </div>
+      </Box>
     </>
   );
 };

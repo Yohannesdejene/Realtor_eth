@@ -6,16 +6,24 @@ import {
   Box,
   useTheme,
   useMediaQuery,
+  Grid,
+  Container,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
 import CircularProgress from "@mui/material/CircularProgress";
 import HomeCover from "../Components/Home/HomeCover";
 import SlideHomes from "../Components/Home/SlideHomes";
 import HomeCard from "../Components/Home/HomeCard";
 import HomeCardSmall from "../Components/Home/HomeCardSmall";
+import ProductCard from "../Components/Home/ProductCard";
+
 import DownloadCard from "../Components/Home/DownloadCard";
 import AdvertCard from "../Components/Home/AdvertCard";
 import Faq from "../Components/Home/Faq";
 import Footer from "../Layouts/Footer";
+import { CommonTypography } from "../Components/CommonComponent/index";
+
 import { setHomes } from "../store/actions/HomesAction";
 import { updateLogin } from "../store/actions/ToogleAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,9 +33,23 @@ const { api, ApiWrapper } = createApiInstance();
 
 import { toast } from "react-toastify";
 
+// Create a custom styled button
+
 const Home = () => {
   const theme = useTheme();
   const themes = theme.palette;
+  const MoreButton = styled(Button)(({ theme }) => ({
+    backgroundColor: themes.green.main,
+    color: themes.white.main,
+    padding: "10px 20px",
+    borderRadius: "5px",
+    textTransform: "none",
+
+    ":hover": {
+      backgroundColor: themes.green.main,
+      color: themes.white.main,
+    },
+  }));
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const home = useSelector((state) => state.homesReducer.homes);
@@ -102,118 +124,52 @@ const Home = () => {
       }}
     >
       <HomeCover />
-      <Typography
-        variant="h3"
-        sx={{
-          mt: "30px",
-          textAlign: "center",
-          fontWeight: 700,
-        }}
-      >
-        Explore homes on Realtor
-      </Typography>
+
+      <CommonTypography label="Explore homes on Realtor" />
+
       <SlideHomes />
-      <Typography
-        variant="h3"
-        sx={{
-          mt: "5px",
-          textAlign: "center",
-          fontWeight: 700,
-        }}
-      >
-        Featured Homes
-      </Typography>
-      <Box
-        sx={{
-          ml: {
-            lg: "5%",
-            sm: "3%",
-            xs: "0px",
-            md: "10%",
-          },
-          // mr: {
-          //   lg: "3%",
-          //   sm: "3%",
-          //   xs: "0px",
-          // },
-        }}
-      >
-        {" "}
+      <CommonTypography label="Featured Homes" />
+      <Box sx={{ ml: "5%", mr: "5%", mb: "20px" }}>
+        <Grid container spacing={2}>
+          {home.map((home) => (
+            <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+              <ProductCard home={home} />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* </Container> */}
+
         <Box
           sx={{
-            mt: "50px",
+            mt: "20px",
             display: "flex",
-            textAlign: "center",
             justifyContent: "center",
+            justifyContent: "center",
+            width: "100%",
           }}
         >
-          {" "}
           {loading && <CircularProgress />}
+          {isLoggedIn && !loading && (
+            <MoreButton component={Link} href={"/homes"}>
+              Load more houses
+            </MoreButton>
+          )}
+          {!isLoggedIn && !loading && (
+            <MoreButton onClick={handleGotoLogin}>
+              Login To View More Homes
+            </MoreButton>
+          )}
         </Box>
-        {!loading && <HomeCardSmall cards={home} />}
+
+        <CommonTypography label="Download Our app" />
+        <DownloadCard />
+        <AdvertCard />
+
+        <CommonTypography label="Frequently asked questions" />
+        <Faq />
       </Box>
 
-      {isLoggedIn && (
-        <Button
-          style={{
-            marginTop: "25px",
-            fontFamily: "Roboto",
-            textAlign: "center",
-            fontWeight: "bold",
-            color: themes.green.main,
-            textTransform: "none",
-            fontSize: "17px",
-          }}
-          component={Link}
-          href={"/homes"}
-        >
-          Load more houses
-        </Button>
-      )}
-      {!isLoggedIn && (
-        <Button
-          style={{
-            marginTop: "25px",
-            fontFamily: "Roboto",
-            fontWeight: "bold",
-            textAlign: "center",
-            color: themes.green.main,
-            textTransform: "none",
-            fontSize: "18px",
-          }}
-          onClick={handleGotoLogin}
-        >
-          Login To View More Homes
-        </Button>
-      )}
-      <Typography
-        variant="h3"
-        sx={{
-          mt: "30px",
-          textAlign: "center",
-          fontWeight: 700,
-        }}
-      >
-        Realtor Agent
-      </Typography>
-      <DownloadCard />
-      <AdvertCard />
-      <Typography
-        variant="h3"
-        sx={{
-          mt: {
-            lg: "5px",
-            md: "50px",
-            sm: "50px",
-            xs: "30px",
-          },
-          textAlign: "center",
-          fontWeight: 700,
-        }}
-      >
-        Frequently asked questions
-      </Typography>
-      <Faq />
       <Footer />
       <ApiWrapper />
     </div>

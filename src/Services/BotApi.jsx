@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 const createApiInstance = () => {
   const api = axios.create({
     // baseURL: "https://circlefreelance.com/realtor",
-    baseURL: "https://api.realtoreth.com",
+
+    baseURL: "https://api.realtoreth.com/realtor",
+    // baseURL: "https://api.realtoreth.com",
     headers: {
       "Content-Type": "application/json",
       // "Content-Type": "multipart/form-data",

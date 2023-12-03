@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 const api = axios.create({
   // baseURL: "https://circlefreelance.com/realtor",
-  baseURL: "https://api.realtoreth.com",
+  baseURL: "https://api.realtoreth.com/realtor",
   // baseURL: 'http://localhost:4004/api',
   headers: {
     "Content-Type": "application/json",

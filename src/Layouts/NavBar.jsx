@@ -33,8 +33,8 @@ import { useTranslation } from "react-i18next";
 import { updateLanguage } from "../store/actions/ToogleAction";
 import { updateDarkMode } from "../store/actions/ToogleAction";
 import { updateLogin } from "../store/actions/ToogleAction";
-
 import Dialoge from "../Components/auth/Dialoge";
+
 const realestates = [
   {
     name: "Ayat RealEstate",
@@ -723,12 +723,35 @@ function NavBar() {
 
             {/* <RequestDialoge /> */}
             {login && (
-              <StyledButton component={Link} href="/request">
+              <Button
+                component={Link}
+                href="/request"
+                style={{
+                  backgroundColor: themes.green.main,
+                  textTransform: "none",
+                  fontSize: "15px",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  color: themes.white.main,
+                }}
+              >
                 Request
-              </StyledButton>
+              </Button>
             )}
             {!login && (
-              <StyledButton onClick={handleGotoLogin}>Request</StyledButton>
+              <Button
+                onClick={handleGotoLogin}
+                style={{
+                  backgroundColor: themes.green.main,
+                  textTransform: "none",
+                  fontSize: "15px",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  color: themes.white.main,
+                }}
+              >
+                Request
+              </Button>
             )}
           </Box>
 

@@ -1,9 +1,10 @@
 import { useState, useEffect, useReducer, useSearchParams } from "react";
-import { Typography, Box, Button, Pagination } from "@mui/material";
+import { Typography, Box, Button, Pagination, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
 import HomeCardSaved from "../Components/Home/HomeCardSaved";
+import ProductCard from "../Components/Home/ProductCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../Layouts/Footer";
 import { useParams } from "react-router-dom";
@@ -85,14 +86,8 @@ const SavedHomes = () => {
     <>
       <Box
         sx={{
-          marginLeft: {
-            sm: "5%",
-            xs: "2%",
-          },
-          marginRight: {
-            sm: "5%",
-            xs: "2%",
-          },
+          ml: "5%",
+          mr: "5%",
           mt: "100px",
 
           display: "flex",
@@ -122,6 +117,16 @@ const SavedHomes = () => {
         <Box sx={{ textAlign: "center", justifyContent: "center" }}>
           {loading && <CircularProgress />}
         </Box>
+        {!loading && (
+          <Grid container spacing={2}>
+            {homes.map((home) => (
+              <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                <ProductCard home={home} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
         {!loading && <HomeCardSaved cards={homes} />}
         {homes && !loading && homes.length === 0 && (
           <Typography

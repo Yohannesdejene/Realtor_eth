@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Typography, useMediaQuery, Box, Pagination } from "@mui/material";
+import {
+  Typography,
+  useMediaQuery,
+  Box,
+  Pagination,
+  Grid,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
@@ -8,7 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 
 ///components
-import HomeCardSmall from "../Components/Home/HomeCardSmall";
+import ProductCard from "../Components/Home/ProductCard";
 import Footer from "../Layouts/Footer";
 import Filter from "../Components/Categories/Filter";
 import { useLocation } from "react-router-dom";
@@ -19,218 +25,9 @@ import { setHomes } from "../store/actions/HomesAction";
 import { useDispatch, useSelector } from "react-redux";
 
 import api from "../Services/index";
-const cards = [
-  {
-    id: 1,
-    image: "/Images/Home.jpg",
-    text: "Apprtments",
-    type: "rent",
-    name: "Lemi kura Appartment",
-    price: "20000",
-    location: "Lemi fiyel bet ,Addis Ababa",
-    bedroom: 2,
-    bathroom: 3,
-    sqm: 0.0,
-    route: "Appartment",
-    images: {
-      image: "/Images/Home.jpg",
-      image: "/Images/Home.jpg",
-      image: "/Images/Home.jpg",
-      image: "/Images/Home.jpg",
-      image: "/Images/Home.jpg",
-      image: "/Images/Home.jpg",
-    },
-  },
-  {
-    id: 2,
-    image: "/Images/home2.jpg",
-    text: "Condominuim",
-    type: "rent",
-    name: "Lemi kura Appartment",
-    price: "20000",
-    location: "Lemi fiyel bet ,Addis Ababa",
-    bedroom: 2,
-    bathroom: 3,
-    sqm: 0.0,
-    route: "condominium",
-  },
-  {
-    id: 3,
-    image: "/Images/home3.jpg",
-    text: "Villa",
-    type: "rent",
-    name: "Lemi kura Appartment",
-    price: "20000",
-    location: "Lemi fiyel bet ,Addis Ababa",
-    bedroom: 2,
-    bathroom: 3,
-    sqm: 0.0,
-    route: "villa",
-  },
-  {
-    id: 4,
-    image: "/Images/home1.jpeg",
-    text: "Guest House",
-    type: "rent",
-    name: "Lemi kura Appartment",
-    price: "20000",
-    location: "Lemi fiyel bet ,Addis Ababa",
-    bedroom: 2,
-    bathroom: 3,
-    sqm: 0.0,
-    route: "Guesthouse",
-  },
-  {
-    id: 5,
-    image: "/Images/home1.jpeg",
-    text: "Penhouse",
-    type: "rent",
-    name: "Lemi kura Appartment",
-    price: "20000",
-    location: "Lemi fiyel bet ,Addis Ababa",
-    bedroom: 2,
-    bathroom: 3,
-    sqm: 0.0,
-    route: "pentHouse",
-  },
-  {
-    id: 6,
-    image: "/Images/home2.jpg",
-    text: "Apprtments",
-    type: "rent",
-    name: "Lemi kura Appartment",
-    price: "20000",
-    location: "Lemi fiyel bet ,Addis Ababa",
-    bedroom: 2,
-    bathroom: 3,
-    sqm: 0.0,
-    route: "pentHouse",
-  },
-  // {
-  //   id: 7,
-  //   image: "/Images/home3.jpg",
-  //   text: "Apprtments",
-  //   type: "rent",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-
-  // {
-  //   id: 8,
-  //   image: "/Images/home8.jpg",
-  //   text: "Apprtments",
-  //   type: "rent",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 7,
-  //   image: "/Images/home7.jpg",
-  //   text: "Apprtments",
-  //   type: "rent",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 3,
-  //   image: "/Images/home2.jpg",
-  //   text: "Apprtments",
-  //   type: "sale",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 4,
-  //   image: "/Images/home4.jpg",
-  //   text: "Apprtments",
-  //   type: "rent",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 5,
-  //   image: "/Images/home5.jpg",
-  //   text: "Apprtments",
-  //   type: "sale",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 2,
-  //   image: "/Images/home4.jpg",
-  //   text: "Apprtments",
-  //   type: "Sale",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 6,
-  //   image: "/Images/home2.jpg",
-  //   text: "Apprtments",
-  //   type: "rent",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-  // {
-  //   id: 5,
-  //   image: "/Images/home3.jpg",
-  //   text: "Apprtments",
-  //   type: "sale",
-  //   name: "Lemi kura Appartment",
-  //   price: "20000",
-  //   location: "Lemi fiyel bet ,Addis Ababa",
-  //   bedroom: 2,
-  //   bathroom: 3,
-  //   sqm: 0.0,
-  //   route: "pentHouse",
-  // },
-];
 
 const AdvancedFilter = () => {
   const dispatch = useDispatch();
-  const sm = useMediaQuery("(max-width:600px)");
-  const md = useMediaQuery("(max-width:960px)");
-  const lg = useMediaQuery("(max-width:1280px)");
   const theme = useTheme();
   const themes = theme.palette;
   const locations = useLocation();
@@ -310,18 +107,8 @@ const AdvancedFilter = () => {
     <>
       <Box
         sx={{
-          marginLeft: {
-            lg: "5%",
-            md: "5%",
-            sm: "5%",
-            xs: "2%",
-          },
-          marginRight: {
-            lg: "5%",
-            md: "5%",
-            sm: "5%",
-            xs: "2%",
-          },
+          ml: "5%",
+          mr: "5%",
           marginTop: "80px",
           height: "auto",
         }}
@@ -367,7 +154,15 @@ const AdvancedFilter = () => {
         <Box sx={{ textAlign: "center", justifyContent: "center" }}>
           {loading && <CircularProgress />}
         </Box>
-        {!loading && <HomeCardSmall cards={homes} />}
+        {!loading && (
+          <Grid container spacing={2}>
+            {homes.map((home) => (
+              <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                <ProductCard home={home} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
         {!loading && homes.length === 0 && (
           <Typography
             variant="h4"
@@ -377,7 +172,12 @@ const AdvancedFilter = () => {
           </Typography>
         )}
         <Pagination
-          sx={{ display: "flex", justifyContent: "center", mt: "40px" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: "40px",
+            mb: "10px",
+          }}
           count={Math.ceil(totalHomes / limit)}
           page={currentPage}
           onChange={handlePageChange}
