@@ -138,7 +138,7 @@ const HomeCover = () => {
             backgroundColor: "rgba(255, 255, 255, 0.4)",
             borderRadius: "0.5rem",
             display: "inline-flex",
-            width: { xs: "45%", sm: "35%", md: "20%", lg: "15%" },
+            width: { xs: "45%", sm: "35%", md: "20%", lg: "12%" },
             border: "none",
             mr: "24%",
           }}
