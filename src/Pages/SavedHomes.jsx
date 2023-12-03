@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
 import HomeCardSaved from "../Components/Home/HomeCardSaved";
-import ProductCard from "../Components/Home/ProductCard";
+import RemoveHomeCard from "../Components/Home/RemoveHomeCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../Layouts/Footer";
 import { useParams } from "react-router-dom";
@@ -121,13 +121,12 @@ const SavedHomes = () => {
           <Grid container spacing={2}>
             {homes.map((home) => (
               <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
-                <ProductCard home={home} />
+                <RemoveHomeCard home={home} />
               </Grid>
             ))}
           </Grid>
         )}
 
-        {!loading && <HomeCardSaved cards={homes} />}
         {homes && !loading && homes.length === 0 && (
           <Typography
             variant="h4"
@@ -138,7 +137,12 @@ const SavedHomes = () => {
         )}
 
         <Pagination
-          sx={{ display: "flex", justifyContent: "center", mt: "40px" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: "40px",
+            mb: "30px",
+          }}
           count={Math.ceil(totalHomes / limit)}
           page={currentPage}
           onChange={handlePageChange}
