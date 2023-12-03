@@ -20,7 +20,7 @@ const SavedHomes = () => {
   const homes = useSelector((homes) => homes.homesReducer.savedHomes);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalHomes, setTotalHomes] = useState(0);
-  const limit = 10;
+  const limit = 12;
   // console.log("homes", homes.house);
   useEffect(() => {
     setLoading(true);

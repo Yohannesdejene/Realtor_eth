@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-import HomeCardSmall from "../Components/Home/HomeCardSmall";
 import ProductCard from "../Components/Home/ProductCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../Layouts/Footer";
@@ -38,7 +37,7 @@ const HomeType = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalHomes, setTotalHomes] = useState(0);
-  const limit = 10;
+  const limit = 12;
 
   ////get earch query
   const locations = useLocation();
