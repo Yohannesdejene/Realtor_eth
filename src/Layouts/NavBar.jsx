@@ -755,13 +755,6 @@ function NavBar() {
             )}
           </Box>
 
-          {/* <Box sx={{ mr: "10px" }}>
-            <select value={toogle.language} onChange={handleLanguageChange}>
-              <option value="en">English</option>
-              <option value="am">አማርኛ</option>
-            </select>
-          </Box> */}
-
           <Box className="mode">
             {toogle.darkMode && (
               <Button
