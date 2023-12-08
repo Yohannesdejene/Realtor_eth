@@ -75,7 +75,7 @@ const ImageCard = ({
                       cursor: "pointer",
                     }}
                     // image={`https://circlefreelance.com/realtor/${houseImages[currentImageIndex].imageUrl}`}
-                    image={`https://circlefreelance.com/realtor/${
+                    image={`https://api.realtoreth.com/realtor${
                       houseImages[currentImageIndex].imageUrl ?? "fallback.jpg"
                     }`}
                   />
@@ -152,7 +152,7 @@ const ImageCard = ({
                     key={index}
                     // src={image}
                     // src={`https://circlefreelance.com/realtor/${image.imageUrl}`}
-                    src={`https://circlefreelance.com/realtor/${
+                    src={`https://api.realtoreth.com/realtor/${
                       image.imageUrl ?? "fallback.jpg"
                     }`}
                     alt={`Thumbnail ${index + 1}`}

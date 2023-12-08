@@ -142,7 +142,7 @@ const ProductCard = ({ home, handleClick }) => {
       >
         <CardMedia
           component="img"
-          image={`https://circlefreelance.com/realtor/${home.coverImage}`}
+          image={`https://api.realtoreth.com/realtor/${home.coverImage}`}
           alt={home.text}
           sx={{
             width: "100%",

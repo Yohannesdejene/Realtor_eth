@@ -53,9 +53,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const home = useSelector((state) => state.homesReducer.homes);
-  const buyRent = useSelector((toogle) => toogle.tooglesReducer.buyRent);
   const isLoggedIn = useSelector((user) => user.usersReducer.isLoggedIn);
-  const serviceChoice = buyRent === "buy" ? "sale" : "rent";
+
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const handleImageIndexChange = (index) => {
+    setImageIndex(index);
+  };
+  const serviceChoice = imageIndex === 0 ? "sale" : "rent";
   useEffect(() => {
     setLoading(true);
 
@@ -113,17 +118,21 @@ const Home = () => {
   const handleGotoLogin = () => {
     dispatch(updateLogin(true));
   };
+
+  console.log("image index in parent", imageIndex);
+
   return (
     <div
       style={{
         marginTop: "60px",
+        // marginTop: "100px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         position: "relative",
       }}
     >
-      <HomeCover />
+      <HomeCover onImageIndexChange={handleImageIndexChange} />
 
       <CommonTypography label="Explore homes on Realtor" />
 
@@ -131,11 +140,12 @@ const Home = () => {
       <CommonTypography label="Featured Homes" />
       <Box sx={{ ml: "5%", mr: "5%", mb: "20px" }}>
         <Grid container spacing={2}>
-          {home.map((home) => (
-            <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
-              <ProductCard home={home} />
-            </Grid>
-          ))}
+          {!loading &&
+            home.map((home) => (
+              <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                <ProductCard home={home} />
+              </Grid>
+            ))}
         </Grid>
 
         {/* </Container> */}
