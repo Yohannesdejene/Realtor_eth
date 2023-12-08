@@ -29,11 +29,7 @@ const images = [
     title: "Image 1",
     description: "",
   },
-  {
-    url: "/Realestates/ayat/2.jpg",
-    title: "Image 2",
-    description: "Discover your dream home with Ayat Real Estates. ",
-  },
+
   {
     url: "/Realestates/ayat/3.jpg",
     title: "Image 3",

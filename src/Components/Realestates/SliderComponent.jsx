@@ -109,8 +109,17 @@ const SliderComponent = ({ images }) => {
           }}
         >
           {/* {images[sliderIndex].title} */}
-          {images[sliderIndex].description}
         </h2>
+        <Typography
+          style={{
+            color: "#ffffff",
+            fontSize: "20px",
+            fontWeight: "bold",
+            fontWeight: 900,
+          }}
+        >
+          {images[sliderIndex].description}
+        </Typography>
         {/* <p>{images[sliderIndex].description}</p> */}
       </div>
 
