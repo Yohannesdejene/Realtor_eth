@@ -24,7 +24,7 @@ import { updateLogin } from "../../store/actions/ToogleAction";
 import { useDispatch, useSelector } from "react-redux";
 
 import api from "../../Services/index";
-const ProductCard = ({ home, handleClick }) => {
+const ProductCardDetail = ({ home, handleClick }) => {
   const theme = useTheme();
   const themes = theme.palette;
   const navigate = useNavigate();
@@ -116,6 +116,7 @@ const ProductCard = ({ home, handleClick }) => {
   };
   const handleClickCard = (cardId) => {
     navigate("/detail/" + `${cardId}`);
+    window.location.reload();
   };
 
   console.log("hhhh");
@@ -337,4 +338,4 @@ const ProductCard = ({ home, handleClick }) => {
     </Card>
   );
 };
-export default ProductCard;
+export default ProductCardDetail;

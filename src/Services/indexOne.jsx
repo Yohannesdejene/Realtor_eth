@@ -2,8 +2,8 @@ import axios from "axios";
 
 const api = axios.create({
   // baseURL: "https://circlefreelance.com/realtor",
-  baseURL: "https://api.realtoreth.com/realtor",
-  // baseURL: 'http://localhost:4004/api',
+  // baseURL: "https://api.realtoreth.com/realtor",
+  baseURL: "http://localhost:4001/realtor",
   headers: {
     // "Content-Type": "application/json",
     "Content-Type": "multipart/form-data",

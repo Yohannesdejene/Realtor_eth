@@ -400,7 +400,7 @@ const FilterVertical = () => {
             }}
           >
             {" "}
-            Filters
+            Filter Options
           </Typography>
           {/* <FormControl variant="outlined">
             <InputLabel id="category-label">House Type </InputLabel>

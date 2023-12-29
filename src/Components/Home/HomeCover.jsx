@@ -53,14 +53,6 @@ const HomeCover = (props) => {
     dispatch(setSearch(event.target.value));
   };
 
-  const handleFocus = () => {
-    setIsTypingStopped(true);
-  };
-
-  const handleBlur = () => {
-    setIsTypingStopped(false);
-  };
-
   return (
     <Box
       style={{
@@ -181,8 +173,6 @@ const HomeCover = (props) => {
       >
         <TextField
           onChange={handleInputChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           sx={{
             backgroundColor: theme.palette.white.main,
             borderRadius: "0.5rem",

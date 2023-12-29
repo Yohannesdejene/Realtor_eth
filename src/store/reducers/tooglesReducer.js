@@ -6,7 +6,7 @@ const intialState = {
   request: false,
   login: false,
   signup: false,
-  darkMode: initialDarkMode,
+  darkMode: false,
   sideMenu: false,
   language: "en",
   buyRent: "buy",

@@ -14,7 +14,6 @@ import ProductCard from "../../Components/Home/ProductCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../Layouts/Footer";
 import SliderComponent from "../../Components/Realestates/SliderComponent";
-import ImageSlider from "../../Components/Realestates/ImageSlider";
 /////
 import { useSelector, useDispatch } from "react-redux";
 
@@ -26,18 +25,19 @@ import api from "../../Services/index";
 
 const images = [
   {
-    url: "/Realestates/ayat/3.jpg",
-    title: "Image 3",
-    description: "Ayat Realestates for sale and rent",
+    url: "/Realestates/phison/1.png",
+    title: "Image 1",
+    description: "Phison Realetstate  appartments home compound",
   },
+
   {
-    url: "/Realestates/ayat/4.jpg",
+    url: "/Realestates/phison/2.png",
     title: "Image 3",
     description: "",
   },
 ];
 
-const AyatRealestate = () => {
+const PhisonRealestate = () => {
   const theme = useTheme();
   const themes = theme.palette;
   const [loading, setLoading] = useState(true);
@@ -59,7 +59,7 @@ const AyatRealestate = () => {
       try {
         api
           .get(
-            `/unauth/house/filterrealestate?offset=${currentPage}&realestateType=ayat&bedrooms=${filter.bedrooms}&bathrooms=${filter.bathrooms}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&minArea=${filter.minArea}&maxArea=${filter.maxArea}&subcity=${filter.subcity}&furnishingType=${filter.furnishingType}&serviceType=${filter.serviceType}`,
+            `/unauth/house/filterrealestate?offset=${currentPage}&realestateType=phison&bedrooms=${filter.bedrooms}&bathrooms=${filter.bathrooms}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&minArea=${filter.minArea}&maxArea=${filter.maxArea}&subcity=${filter.subcity}&furnishingType=${filter.furnishingType}&serviceType=${filter.serviceType}`,
             {
               withCredentials: true,
             }
@@ -124,11 +124,10 @@ const AyatRealestate = () => {
         }}
       >
         <SliderComponent images={images} />
-        {/* <ImageSlider /> */}
       </Box>
       {/* <Container sx={{ textAlign: "left", mb: "30px" }}> */}
       <Box sx={{ ml: "5%", mr: "5%", mb: "20px" }}>
-        <CommonTypography label=" Ayat Realestates" />
+        <CommonTypography label=" Phison Realestates" />
 
         <Divider />
         <Box
@@ -218,4 +217,4 @@ const AyatRealestate = () => {
     </>
   );
 };
-export default AyatRealestate;
+export default PhisonRealestate;

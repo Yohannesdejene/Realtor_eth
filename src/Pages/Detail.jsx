@@ -14,9 +14,7 @@ import {
   Card,
   Divider,
 } from "@mui/material";
-
-//icons
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import GoogleMapComponent from "../Components/Details/GoogleMapComponent";
 
 //react componenet
 import { useParams, useNavigate } from "react-router-dom";
@@ -26,16 +24,13 @@ import { toast } from "react-toastify";
 
 ///stores
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setDetailHome,
-  setHomes,
-  setDetailImages,
-} from "../store/actions/HomesAction";
 
 ///componenets
 import ContactAgent from "../Components/Details/ContactAgent";
-import ImageCard from "../Components/Details/ImagesCard";
+import ImagesCardFull from "../Components/Details/ImagesCardFull";
+import ImagesCard from "../Components/Details/ImagesCard";
 import ProductCard from "../Components/Home/ProductCard";
+import ProductCardDetail from "../Components/Home/ProductCardDetail";
 
 import DetailTable from "../Components/Details/DetailTable";
 import Neighborhood from "../Components/Details/Neighborhood";
@@ -94,9 +89,41 @@ const Detail = () => {
           })
           .then((res) => {
             console.log("response detail", res);
+
             // dispatch(setDetailHome(res.data.house));
             setHouse(res.data.house);
             setLoading(false);
+            setLoadingSimilar(true);
+            const houseTemp = res.data.house;
+            api
+              .get(
+                `/unauth/house/relatedSearch?houseType=${houseTemp.houseType}&subcity=${houseTemp.subcity}`,
+                {
+                  withCredentials: true,
+                }
+              )
+              .then((res) => {
+                console.log("related", res);
+                setSimilarHouse(res.data.houses);
+
+                setLoadingSimilar(false);
+              })
+              .catch((err) => {
+                console.log(err);
+                toast.error(
+                  "Can't fatch data .check your internet connection",
+                  {
+                    autoClose: 3000,
+                  },
+                  {
+                    // Set the background color
+                    backgroundColor: themes.green.main,
+                    // Set the text color
+                    color: themes.white.main,
+                  }
+                );
+                setLoadingSimilar(false);
+              });
           })
           .catch((err) => {
             console.log(err);
@@ -139,7 +166,7 @@ const Detail = () => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("response", res);
+            console.log("response images ", res);
             setHouseImages(res.data.houseImages);
             setLoadingImages(false);
           })
@@ -176,60 +203,65 @@ const Detail = () => {
         setLoadingImages(false);
       }
     };
-    const fetchLSimilarListing = () => {
-      setLoadingImages(true);
-      try {
-        api
-          .get(`/unauth/houses`, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log("response", res);
-            setSimilarHouse(res.data.houses);
 
-            setLoadingSimilar(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            toast.error(
-              "Can't fatch data .check your internet connection",
-              {
-                autoClose: 3000,
-              },
-              {
-                // Set the background color
-                backgroundColor: themes.green.main,
-                // Set the text color
-                color: themes.white.main,
-              }
-            );
-            setLoadingSimilar(false);
-          });
-      } catch (err) {
-        console.log(err);
-        toast.error(
-          "Can't fatch data .check your internet connection",
-          {
-            autoClose: 3000,
-          },
-          {
-            // Set the background color
-            backgroundColor: themes.green.main,
-            // Set the text color
-            color: themes.white.main,
-          }
-        );
-        setLoadingSimilar(false);
-      }
-    };
+    // const fetchSimilarHomes = () => {
+    //   setLoadingSimilar(true);
+    //   try {
+    //     api
+    //       .get(
+    //         `/unauth/house/relatedSearch?houseType=${house.homeType}&subcity=${house.subcity}`,
+    //         {
+    //           withCredentials: true,
+    //         }
+    //       )
+    //       .then((res) => {
+    //         console.log("related", res);
+    //         setSimilarHouse(res.data.houses);
+
+    //         setLoadingSimilar(false);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //         toast.error(
+    //           "Can't fatch data .check your internet connection",
+    //           {
+    //             autoClose: 3000,
+    //           },
+    //           {
+    //             // Set the background color
+    //             backgroundColor: themes.green.main,
+    //             // Set the text color
+    //             color: themes.white.main,
+    //           }
+    //         );
+    //         setLoadingSimilar(false);
+    //       });
+    //   } catch (err) {
+    //     console.log(err);
+    //     toast.error(
+    //       "Can't fatch data .check your internet connection",
+    //       {
+    //         autoClose: 3000,
+    //       },
+    //       {
+    //         // Set the background color
+    //         backgroundColor: themes.green.main,
+    //         // Set the text color
+    //         color: themes.white.main,
+    //       }
+    //     );
+    //     setLoadingSimilar(false);
+    //   }
+    // };
+
     fetchDetail();
     fetchImages();
-    fetchLSimilarListing();
+    // fetchData();
   }, []);
   const content = () => {
     return (
       // <Container>
-      <ImageCard
+      <ImagesCardFull
         handlePrevImage={handlePrevImage}
         handleNextImage={handleNextImage}
         handleDialogeChange={handleDialogeChange}
@@ -253,6 +285,8 @@ const Detail = () => {
     console.log("redirecting");
     navigate(`/detail/${id}`);
   };
+  const latitude = 9.05698; // Replace with your desired latitude
+  const longitude = 38.868914; // Replace with your desired longitude
 
   return (
     <>
@@ -277,43 +311,98 @@ const Detail = () => {
         ) : (
           <>
             <Container>
-              {" "}
-              <CommonBack label="Back to Home" onClick={onBack} />
-              <Grid container spacing="20px">
-                <Grid item xs={12} sm={9}>
-                  {/* <Container> */}
-                  <ImageCard
-                    handlePrevImage={handlePrevImage}
-                    handleNextImage={handleNextImage}
-                    handleDialogeChange={handleDialogeChange}
-                    currentImageIndex={currentImageIndex}
-                    houseImages={houseImages}
-                    handleThumbnailClick={handleThumbnailClick}
-                    dialogeValue={dialogeValue}
-                  />
-                  {/* </Container> */}
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <ContactAgent />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <Discription house={house} />
-                </Grid>
-                <Divider
-                  orientation="vertical"
-                  sx={{ color: "#000000" }}
-                  flexItem
-                />
+              <Box>
+                <CommonBack label="Back to Home" onClick={onBack} />
+                <Grid container spacing="20px">
+                  <Grid item xs={12} sm={9}>
+                    {/* <Container> */}
+                    <ImagesCard
+                      handlePrevImage={handlePrevImage}
+                      handleNextImage={handleNextImage}
+                      handleDialogeChange={handleDialogeChange}
+                      currentImageIndex={currentImageIndex}
+                      houseImages={houseImages}
+                      handleThumbnailClick={handleThumbnailClick}
+                      dialogeValue={dialogeValue}
+                    />
+                    {/* </Container> */}
+                  </Grid>
 
-                <Grid item xs={12} sm={6}>
-                  <Description house={house} />
+                  <Grid
+                    item
+                    xs={12}
+                    sm={3}
+                    sx={{
+                      ml: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                      mr: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                    }}
+                  >
+                    <ContactAgent />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={5}
+                    sx={{
+                      ml: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                      mr: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                    }}
+                  >
+                    <Discription house={house} />
+                  </Grid>
+                  <Divider
+                    orientation="vertical"
+                    sx={{
+                      color: "#000000",
+                      ml: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                      mr: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                    }}
+                    flexItem
+                  />
+
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    sx={{
+                      ml: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                      mr: {
+                        xs: "5%",
+                        sm: "0%",
+                      },
+                    }}
+                  >
+                    <Description house={house} />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <DialogeBoxFull
-                dialogeValue={dialogeValue}
-                handleDialogeChange={handleDialogeChange}
-                Content={content}
-              />
+                <DialogeBoxFull
+                  dialogeValue={dialogeValue}
+                  handleDialogeChange={handleDialogeChange}
+                  Content={content}
+                />
+                {/* </Container> */}
+              </Box>
             </Container>
             <Container>
               <Grid container spacing={5}>
@@ -325,6 +414,36 @@ const Detail = () => {
                   <Neighborhood house={house} />
                 </Grid>
               </Grid>
+            </Container>
+            <Container
+              sx={{
+                mt: "10px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              {/* <Grid container spacing={5}> */}
+              {/* <DetailTable house={house} /> */}
+
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: "21px",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  mb: "20px",
+                  mt: "40px",
+                }}
+              >
+                Maps
+              </Typography>
+              <GoogleMapComponent
+                latitude={latitude}
+                longitude={longitude}
+                house={house}
+              />
+              {/* </Grid> */}
             </Container>
             <Container>
               <Typography
@@ -343,7 +462,7 @@ const Detail = () => {
                 {similarHouse &&
                   similarHouse.map((home) => (
                     <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
-                      <ProductCard home={home} />
+                      <ProductCardDetail home={home} />
                     </Grid>
                   ))}
               </Grid>

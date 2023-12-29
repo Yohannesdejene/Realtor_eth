@@ -1671,10 +1671,9 @@ const Filter = () => {
           }}
           onClick={toggleDrawer}
         />
-        <Typography
-          variant="h4"
-          sx={{ ml: "5px", fontFamily: "Roboto" }}
-        ></Typography>
+        <Typography variant="h4" sx={{ ml: "5px", fontFamily: "Roboto" }}>
+          Filter
+        </Typography>
       </Box>
       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
         <Box sx={{ width: "60vw", mb: "50px" }}>

@@ -20,6 +20,19 @@ const Discription = ({ house }) => {
 
   return (
     <Box sx={{ mt: "15px" }}>
+      {house.realestateType !== null && (
+        <Typography
+          variant={xs ? "h4" : "h3"}
+          sx={{
+            mb: "10px",
+            fontFamily: "Roboto",
+            fontWeight: "bold",
+            textTransform: "capitalize", // Add this line
+          }}
+        >
+          {house.realestateType} realestate
+        </Typography>
+      )}
       <Typography
         variant={xs ? "h4" : "h3"}
         sx={{
@@ -30,6 +43,7 @@ const Discription = ({ house }) => {
       >
         {house.houseType}
       </Typography>
+
       <Typography
         variant={xs ? "h4" : "h3"}
         sx={{

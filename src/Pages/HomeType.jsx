@@ -161,11 +161,12 @@ const HomeType = () => {
         </Box>
         {!loading && (
           <Grid container spacing={2}>
-            {homes.map((home) => (
-              <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
-                <ProductCard home={home} />
-              </Grid>
-            ))}
+            {homes &&
+              homes.map((home) => (
+                <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                  <ProductCard home={home} />
+                </Grid>
+              ))}
           </Grid>
         )}
         {!loading && homes.length === 0 && (

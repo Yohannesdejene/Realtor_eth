@@ -1,166 +1,104 @@
-import React from "react";
-import { Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Button, Typography, useTheme, Box, CardMedia } from "@mui/material";
+import Carousel from "react-material-ui-carousel";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-const SliderComponent = ({ images }) => {
-  const [sliderIndex, setSliderIndex] = React.useState(0);
-  const [isHovered, setIsHovered] = React.useState(false);
+const ImageSlider = ({ images }) => {
+  const theme = useTheme();
+  const themes = theme.palette;
+  const [index, setIndex] = React.useState(0);
 
-  // Automatically change the slider image after a set interval
-  React.useEffect(() => {
-    const intervalId = setInterval(() => {
-      setSliderIndex((prevIndex) => {
-        if (prevIndex === images.length - 1) {
-          return 0;
-        }
-        return prevIndex + 1;
-      });
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const handlePrevClick = () => {
-    setSliderIndex((prevIndex) => {
-      if (prevIndex === 0) {
-        return images.length - 1;
-      }
-      return prevIndex - 1;
-    });
+  const handleNext = () => {
+    setIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const handleNextClick = () => {
-    setSliderIndex((prevIndex) => {
-      if (prevIndex === images.length - 1) {
-        return 0;
-      }
-      return prevIndex + 1;
-    });
+  const handlePrev = () => {
+    setIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        maxHeight: "70vh",
-        overflow: "hidden",
-        // height: "70vh", // Adjust the height as per your requirements
-        position: "relative",
-        overflow: "hidden",
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <img
-        src={images[sliderIndex].url}
-        alt={images[sliderIndex].title}
-        style={{
-          width: "100%",
-          height: "auto",
-          objectFit: "cover",
-          transition: "opacity 0.5s ease-in-out",
-        }}
-      />
-
-      <div
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+    <div style={{ position: "relative", width: "100%" }}>
+      <Carousel
+        index={index}
+        onChangeIndex={(i) => setIndex(i)}
+        autoPlay={true}
+        stopAutoPlayOnHover={true}
+        interval={5000}
+        animation={"slide"}
+        swipe={true}
+        navButtonsAlwaysVisible={true}
       >
-        {images.map((image, index) => (
-          <div
-            key={index}
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              backgroundColor: index === sliderIndex ? "#000" : "#ccc",
-              margin: "0 5px",
-              cursor: "pointer",
-            }}
-            onClick={() => setSliderIndex(index)}
-          />
-        ))}
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          // backgroundColor: "rgba(0,0,0,0.5)",
-          padding: "16px",
-          borderRadius: "8px",
-          color: "#fff",
-          textAlign: "center",
-          transition: "opacity 0.5s ease-in-out",
-        }}
-      >
-        <h2
-          style={{
-            color: "#ffffff",
-            fontSize: "20px",
-            fontWeight: "bold",
-            fontWeight: 900,
-          }}
-        >
-          {/* {images[sliderIndex].title} */}
-        </h2>
-        <Typography
-          style={{
-            color: "#ffffff",
-            fontSize: "20px",
-            fontWeight: "bold",
-            fontWeight: 900,
-          }}
-        >
-          {images[sliderIndex].description}
-        </Typography>
-        {/* <p>{images[sliderIndex].description}</p> */}
-      </div>
+        {images &&
+          images.map((image, idx) => (
+            <Box
+              key={idx}
+              sx={{
+                position: "relative",
+                width: "100%",
+                height: {
+                  md: "500px",
+                  xs: "300px",
+                  sm: "350px",
+                },
+                // maxHeight: "100%",
+              }}
+            >
+              <CardMedia
+                image={image.url}
+                alt={`Image ${idx + 1}`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  position: "relative",
+                  objectFit: "cover",
+                }}
+              />
+              <Box
+                sx={{
+                  //padding: "15px",
+                  borderRadius: "0.9rem",
+                  [theme.breakpoints.down("sm")]: {
+                    padding: "0.5rem",
+                  },
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
 
-      {isHovered && (
-        <>
-          <button
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "10px",
-              transform: "translateY(-50%)",
-              backgroundColor: "#ffffff",
-              border: "none",
-              padding: "8px",
-              borderRadius: "50%",
-              cursor: "pointer",
-            }}
-            onClick={handlePrevClick}
-          >
-            Prev
-          </button>
-          <button
-            style={{
-              position: "absolute",
-              top: "50%",
-              right: "10px",
-              transform: "translateY(-50%)",
-              backgroundColor: "#ffffff",
-              border: "none",
-              padding: "8px",
-              borderRadius: "50%",
-              cursor: "pointer",
-            }}
-            onClick={handleNextClick}
-          >
-            Next
-          </button>
-        </>
-      )}
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                  backgroundColor:
+                    image?.description !== "" ? "#ffffff33" : "transparent",
+
+                  borderRadius: "30px",
+                  padding: {
+                    sm: "5%",
+                    xs: "2%",
+                  },
+                }}
+              >
+                <Typography
+                  variant="h1"
+                  sx={{
+                    color: themes.common.white,
+                    fontFamily: "Roboto",
+                    fontWeight: 900,
+
+                    width: "100%",
+
+                    [theme.breakpoints.down("sm")]: {
+                      fontSize: "1.5rem",
+                    },
+                  }}
+                >
+                  {image.description}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+      </Carousel>
     </div>
   );
 };
 
-export default SliderComponent;
+export default ImageSlider;

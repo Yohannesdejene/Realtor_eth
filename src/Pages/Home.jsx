@@ -143,6 +143,7 @@ const Home = () => {
           {!loading &&
             home.map((home) => (
               <Grid key={home.id} item xs={12} sm={6} md={4} lg={3}>
+                {console.log("homes", home)}
                 <ProductCard home={home} />
               </Grid>
             ))}

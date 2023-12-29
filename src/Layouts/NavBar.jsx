@@ -38,25 +38,26 @@ import Dialoge from "../Components/auth/Dialoge";
 const realestates = [
   {
     name: "Ayat RealEstate",
-    value: "ayat",
+    value: "ayat_realestate",
   },
   {
     name: "Noah RealEstate",
-    value: "noah",
-  },
-  {
-    name: "Flintstone RealEstate",
-    value: "filtstone",
+    value: "noah_realestate",
   },
   {
     name: "Gift RealEstate",
-    value: "gift",
+    value: "gift_realestate",
   },
   {
-    name: "Metropolitan Realetstae",
-    value: "metropolitan",
+    name: "Jambo RealEstate",
+    value: "jambo_realestate",
+  },
+  {
+    name: "Phison Realetstae",
+    value: "phison_realestate",
   },
 ];
+
 const realestates2 = [
   {
     name: "Jambo RealEstate",
@@ -527,6 +528,149 @@ function NavBar() {
                 </Box>
               </StyledBox>
             )}
+            <StyledButton
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              name="realEstates"
+              sx={{
+                display: "flex",
+                backgroundColor: isBoxVisible.realEstates
+                  ? "#3D783D "
+                  : "white",
+                color: isBoxVisible.realEstates ? "#ffffff" : "#mygrey1",
+                boxShadow: isBoxVisible.realEstates
+                  ? "0 2px 4px rgba(0, 0, 0, 0.1)"
+                  : "none",
+              }}
+            >
+              Realestates
+              {isBoxVisible.realEstates ? (
+                <KeyboardArrowUpIcon
+                  sx={{
+                    color: isBoxVisible.realEstates ? "#ffffff" : "#mygrey1",
+                  }}
+                />
+              ) : (
+                <KeyboardArrowDownIcon
+                  sx={{
+                    color: isBoxVisible.realEstates ? "#ffffff" : "#mygrey1",
+                  }}
+                />
+              )}
+            </StyledButton>
+            {isBoxVisible.realEstates && (
+              <StyledBox
+                onMouseEnter={handleMouseEnterBox}
+                onMouseLeave={handleMouseLeaveBox}
+                sx={{
+                  display: "flex",
+                  left: "200px",
+                  justifyContent: "center",
+                }}
+                id="realEstates"
+              >
+                <Box
+                  sx={{
+                    width: "200px",
+
+                    // flexDirection: "column",
+
+                    ml: "15px",
+                  }}
+                >
+                  {realestates.map((realestate) => (
+                    <Link
+                      href={`/realestates/${realestate.value}`}
+                      sx={{
+                        textDecoration: "none",
+                        display: "block",
+                        color: theme.palette.mygrey1.main,
+                        fontSize: "15px",
+                        mb: "7px",
+                        textalign: "left",
+                        fontFamily: "Roboto",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      {realestate.name}
+                    </Link>
+                  ))}
+
+                  {/* <Link
+                    href={`/realestates/noah_realestate`}
+                    sx={{
+                      textDecoration: "none",
+                      display: "block",
+                      color: theme.palette.mygrey1.main,
+                      fontSize: "15px",
+                      mb: "7px",
+                      textalign: "left",
+                      fontFamily: "Roboto",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    Noah Realestate
+                  </Link>
+                  <Link
+                    href={`/realestates/gift_realestate`}
+                    sx={{
+                      textDecoration: "none",
+                      display: "block",
+                      color: theme.palette.mygrey1.main,
+                      fontSize: "15px",
+                      mb: "7px",
+                      textalign: "left",
+                      fontFamily: "Roboto",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    gift Realestate
+                  </Link>
+                  <Link
+                    href={`/realestates/jambo_realestate`}
+                    sx={{
+                      textDecoration: "none",
+                      display: "block",
+                      color: theme.palette.mygrey1.main,
+                      fontSize: "15px",
+                      mb: "7px",
+                      textalign: "left",
+                      fontFamily: "Roboto",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    Jambo Realestate
+                  </Link>
+
+                  <Link
+                    href={`/realestates/phison_realestate`}
+                    sx={{
+                      textDecoration: "none",
+                      display: "block",
+                      color: theme.palette.mygrey1.main,
+                      fontSize: "15px",
+                      mb: "7px",
+                      textalign: "left",
+                      fontFamily: "Roboto",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    Phison Realestate
+                  </Link> */}
+                </Box>
+              </StyledBox>
+            )}
+
             {/* <StyledButton
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}

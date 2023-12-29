@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useTheme } from "@mui/material";
 const styles = {
   root: {
     display: "flex",
@@ -36,13 +36,53 @@ const styles = {
 };
 
 const NotFound = () => {
+  const theme = useTheme();
+
   return (
-    <div style={styles.root}>
-      <h1 style={styles.heading}>Oops!</h1>
-      <h4 style={styles.subheading}>
+    <div
+      style={{
+        backgroundColor: theme.palette.mywhite.main,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "4rem",
+          fontWeight: "bold",
+          marginBottom: "1rem",
+          color: theme.palette.myblack.main,
+          textAlign: "center",
+        }}
+      >
+        Oops!
+      </h1>
+      <h4
+        style={{
+          fontSize: "1.5rem",
+          marginBottom: "1rem",
+          color: theme.palette.myblack.main,
+          textAlign: "center",
+        }}
+      >
         We couldn't find the page you're looking for.
       </h4>
-      <Link to="/" style={styles.button}>
+      <Link
+        to="/"
+        style={{
+          backgroundColor: theme.palette.green.main,
+          color: "#fff",
+          borderRadius: "4px",
+          padding: "1rem 2rem",
+          textDecoration: "none",
+          "&:hover": {
+            backgroundColor: "#d32f2f",
+          },
+        }}
+      >
         Go back to home page
       </Link>
     </div>
