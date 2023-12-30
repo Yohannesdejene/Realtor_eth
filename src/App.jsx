@@ -229,7 +229,10 @@ function App() {
   const handleButtonClick = () => {
     toast.error("Success message");
   };
-
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode.toString());
+  }, [darkMode]);
+  let theme = darkMode ? ThemeDark : ThemeLight;
   useEffect(() => {
     console.log("darkMode1", darkMode);
     const darkModeTest = localStorage.getItem("darkMode");
@@ -239,12 +242,9 @@ function App() {
       console.log("dispatching");
       const bool = Boolean(darkModeTest);
       dispatch(updateDarkMode(bool));
+      theme = darkModeTest ? ThemeDark : ThemeLight;
     }
-
-    console.log("darkMode2", darkMode);
   }, [dispatch]);
-
-  const theme = darkMode ? ThemeDark : ThemeLight;
 
   useEffect(() => {
     const passphrase = "johnabi";
