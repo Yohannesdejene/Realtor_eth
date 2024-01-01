@@ -190,7 +190,7 @@ const HomeCardSaved = ({ cards }) => {
             <Box sx={{ position: "relative" }}>
               <CardMedia
                 component="img"
-                image={`https://circlefreelance.com/realtor/${card.coverImage}`}
+                image={`https://api.realtoreth.com/realtor${card.coverImage}`}
                 alt={card.text}
                 sx={{ width: "100%", height: "180px", objectFit: "cover" }}
               />

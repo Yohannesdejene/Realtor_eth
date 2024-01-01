@@ -147,7 +147,7 @@ const ProductCard = ({ home, handleClick }) => {
           // localhost:4001/realtor
 
           //https://api.realtoreth.com/realtor/${home.coverImage}
-          image={`http://localhost:4001/realtor${home.coverImage}`}
+          image={`https://api.realtoreth.com/realtor${home.coverImage}`}
           alt={home.text}
           sx={{
             width: "100%",

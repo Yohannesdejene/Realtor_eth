@@ -90,7 +90,7 @@ const ImagesCardFull = ({
                     style={{ transition: "opacity 0.5s ease-in-out" }} // Apply the transition inline
                     // sx={{ height: "90vh", width: "100%" }}
                     // image={`https://circlefreelance.com/realtor/${houseImages[currentImageIndex].imageUrl}`}
-                    image={`http://localhost:4001/realtor${
+                    image={`https://api.realtoreth.com/realtor${
                       houseImages[currentImageIndex].imageUrl ?? "fallback.jpg"
                     }`}
                   />
@@ -201,7 +201,7 @@ const ImagesCardFull = ({
                     key={index}
                     // src={image}
                     // src={`https://circlefreelance.com/realtor/${image.imageUrl}`}
-                    src={`http://localhost:4001/realtor/${
+                    src={`https://api.realtoreth.com/realtor${
                       image.imageUrl ?? "fallback.jpg"
                     }`}
                     alt={`Thumbnail ${index + 1}`}

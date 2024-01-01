@@ -90,7 +90,7 @@ const ImageCard = ({
                   }}
                   style={{ transition: "opacity 0.5s ease-in-out" }} // Apply the transition inline
                   // image={`https://circlefreelance.com/realtor/${houseImages[currentImageIndex].imageUrl}`}
-                  image={`http://localhost:4001/realtor${houseImages[currentImageIndex]?.imageUrl}`}
+                  image={`https://api.realtoreth.com/realtor${houseImages[currentImageIndex]?.imageUrl}`}
                 />
               )}
             <IconButton
@@ -202,7 +202,7 @@ const ImageCard = ({
                   key={index}
                   // src={image}
                   // src={`https://circlefreelance.com/realtor/${image.imageUrl}`}
-                  src={`http://localhost:4001/realtor/${image?.imageUrl}`}
+                  src={`https://api.realtoreth.com/realtor${image?.imageUrl}`}
                   alt={`Home image ${index + 1}`}
                   sx={{
                     // filter:
