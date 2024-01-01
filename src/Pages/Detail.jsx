@@ -436,7 +436,7 @@ const Detail = () => {
                   mt: "40px",
                 }}
               >
-                Map LOcation
+                Map Location
               </Typography>
               <GoogleMapComponent
                 latitude={latitude}

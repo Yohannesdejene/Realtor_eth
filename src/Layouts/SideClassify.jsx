@@ -48,7 +48,7 @@ const realestates = [
     value: "jambo_realestate",
   },
   {
-    name: "Phison Realetstae",
+    name: "Phison RealEstate",
     value: "phison_realestate",
   },
 ];
