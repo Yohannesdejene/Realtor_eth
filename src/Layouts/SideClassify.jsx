@@ -30,35 +30,26 @@ import { updateLogin } from "../store/actions/ToogleAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-const realestatesList = [
+const realestates = [
   {
     name: "Ayat RealEstate",
-    value: "ayat",
+    value: "ayat_realestate",
   },
   {
     name: "Noah RealEstate",
-    value: "noah",
-  },
-  {
-    name: "Flintstone RealEstate",
-    value: "filtstone",
+    value: "noah_realestate",
   },
   {
     name: "Gift RealEstate",
-    value: "gift",
-  },
-  {
-    name: "Metropolitan Realetstae",
-    value: "metropolitan",
+    value: "gift_realestate",
   },
   {
     name: "Jambo RealEstate",
-    value: "jambo",
+    value: "jambo_realestate",
   },
-
   {
-    name: "Realhomes Realetstae",
-    value: "realhomes",
+    name: "Phison Realetstae",
+    value: "phison_realestate",
   },
 ];
 
@@ -300,6 +291,63 @@ const SideClassify = () => {
                   <Link
                     key={index}
                     href={`/homes/${value.value}?serviceType=rent`}
+                    sx={{
+                      textDecoration: "none",
+                      display: "block",
+                      color: theme.palette.mygrey1.main,
+                      mb: "7px",
+                      textalign: "left",
+                      fontFamily: "Roboto",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    {value.name}
+                  </Link>
+                ))}
+              </Box>
+            )}
+
+            <button
+              name="realestates"
+              onClick={handleButtonClick}
+              style={{
+                display: "flex",
+                color: theme.palette.black.main,
+                alignItems: "center",
+
+                width: "100%",
+                // borderColor: "1px solid white",
+                border: "none",
+                fontWeight: "bold",
+                fontSize: "15px",
+                cursor: "pointer",
+                marginBottom: "10px",
+                justifyContent: "space-between",
+              }}
+            >
+              Realestates
+              <ExpandMoreIcon
+                onClick={handleButtonClick}
+                style={{ pointerEvents: "none" }}
+              />
+            </button>
+
+            {open.realestates && (
+              <Box
+                sx={{
+                  width: "200px",
+
+                  // flexDirection: "column",
+                  marginTop: "15px",
+                  ml: "15px",
+                }}
+              >
+                {realestates.map((value, index) => (
+                  <Link
+                    key={index}
+                    href={`/realestates/${realestate.value}`}
                     sx={{
                       textDecoration: "none",
                       display: "block",
