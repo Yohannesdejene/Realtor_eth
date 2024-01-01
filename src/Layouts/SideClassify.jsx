@@ -310,7 +310,7 @@ const SideClassify = () => {
             )}
 
             <button
-              name="realestates"
+              name="realEstates"
               onClick={handleButtonClick}
               style={{
                 display: "flex",
@@ -334,7 +334,7 @@ const SideClassify = () => {
               />
             </button>
 
-            {open.realestates && (
+            {open.realEstates && (
               <Box
                 sx={{
                   width: "200px",
@@ -347,7 +347,7 @@ const SideClassify = () => {
                 {realestates.map((value, index) => (
                   <Link
                     key={index}
-                    href={`/realestates/${realestate.value}`}
+                    href={`/realestates/${value.value}`}
                     sx={{
                       textDecoration: "none",
                       display: "block",

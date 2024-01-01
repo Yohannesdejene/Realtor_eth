@@ -6,8 +6,8 @@ const createApiInstance = () => {
     // baseURL: "https://circlefreelance.com/realtor",
 
     // baseURL: "https://api.realtoreth.com/realtor",
-    // baseURL: "https://api.realtoreth.com",
-    baseURL: "http://localhost:4001/realtor",
+    baseURL: "https://api.realtoreth.com",
+    // baseURL: "http://localhost:4001/realtor",
     headers: {
       "Content-Type": "application/json",
       // "Content-Type": "multipart/form-data",
