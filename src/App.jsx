@@ -207,7 +207,6 @@ function decryptData(ciphertext, passphrase) {
 
 function App() {
   const dispatch = useDispatch();
-
   const darkMode = useSelector((user) => user.tooglesReducer.darkMode);
   const login = useSelector((user) => user.tooglesReducer.login);
 
@@ -232,7 +231,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode.toString());
   }, [darkMode]);
-  let theme = darkMode ? ThemeDark : ThemeLight;
+
   useEffect(() => {
     console.log("darkMode1", darkMode);
     const darkModeTest = localStorage.getItem("darkMode");
@@ -242,9 +241,9 @@ function App() {
       console.log("dispatching");
       const bool = Boolean(darkModeTest);
       dispatch(updateDarkMode(bool));
-      theme = darkModeTest ? ThemeDark : ThemeLight;
     }
   }, [dispatch]);
+  const theme = darkMode ? ThemeDark : ThemeLight;
 
   useEffect(() => {
     const passphrase = "johnabi";
@@ -275,7 +274,7 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={ThemeLight}>
         <CssBaseline />
         <BrowserRouter>
           <NavBar />

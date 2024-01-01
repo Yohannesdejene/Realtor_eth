@@ -899,7 +899,7 @@ function NavBar() {
             )}
           </Box>
 
-          <Box className="mode">
+          {/* <Box className="mode">
             {toogle.darkMode && (
               <Button
                 onClick={handleToggleDarkMode}
@@ -952,7 +952,7 @@ function NavBar() {
                 </Tooltip>
               </Button>
             )}
-          </Box>
+          </Box> */}
 
           {user.isLoggedIn && <AccountPopover />}
 
