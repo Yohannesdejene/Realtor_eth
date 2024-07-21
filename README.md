@@ -52,6 +52,9 @@ Before you begin, ensure you have the following installed:
     ```bash
     yarn install
     ```
+![Project Design](public/homeImage.png)
+
+
 
 ### Running the Application
 
@@ -64,7 +67,6 @@ npm run dev
 yarn dev
 
 
-![Project Design](public/homeImage.png)
 
 real-estate-app/
 ├── public/
