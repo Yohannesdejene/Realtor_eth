@@ -64,6 +64,7 @@ npm run dev
 yarn dev
 
 
+![Project Design](public/images/homeImage.png)
 
 real-estate-app/
 ├── public/
