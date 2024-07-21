@@ -52,9 +52,6 @@ Before you begin, ensure you have the following installed:
     ```bash
     yarn install
     ```
-![Project Design](public/homeImage.png)
-
-
 
 ### Running the Application
 
@@ -84,3 +81,6 @@ real-estate-app/
 ├── package.json
 ├── README.md
 └── vite.config.js
+
+![Project Design](public/homeImage.png)
+
