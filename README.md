@@ -1,7 +1,9 @@
 # Real Estate and Home Rent/Sales Application Front end
 
 Welcome to the Real Estate and Home Rent/Sales Application! This is a comprehensive platform for buying, selling, and renting properties, built with React and Vite for a fast and modern development experience.
+
 ![Project Design](public/homeImage.png)
+![Project Design](public/login.png)
 ## Table of Contents
 
 - [Features](#features)
