@@ -1,4 +1,4 @@
-# Real Estate and Home Rent/Sales Application
+# Real Estate and Home Rent/Sales Application Front end
 
 Welcome to the Real Estate and Home Rent/Sales Application! This is a comprehensive platform for buying, selling, and renting properties, built with React and Vite for a fast and modern development experience.
 
@@ -36,9 +36,8 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/Yohannesdejene/real-estate-app.git
-    cd real-estate-app
-    ```
+    git clone https://github.com/Yohannesdejene/Realtor_eth
+    cd Realtor_eth
 
 2. **Install dependencies:**
 
